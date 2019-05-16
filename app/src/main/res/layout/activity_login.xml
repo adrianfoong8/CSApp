@@ -23,13 +23,12 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_gravity="center"
             android:src="@mipmap/ic_launcher_round" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_marginTop="40dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp">
 
             <EditText
                 android:id="@+id/email"
@@ -43,8 +42,8 @@
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_marginTop="20dp">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
 
             <EditText
                 android:id="@+id/old_password"
@@ -60,29 +59,9 @@
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="32dp"
             android:backgroundTint="@color/colorAccent"
             android:text="@string/login"
-            android:textColor="@color/colorIcons"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/register"
-            android:textColor="@color/colorIcons"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/btn_reset_password"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/forgot_password"
             android:textColor="@color/colorIcons"
             android:textStyle="bold" />
     </LinearLayout>
