@@ -9,30 +9,56 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Normal: Confinement Service"
+            android:textSize="24sp"
+            android:textStyle="normal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bold: Confinement Service"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Italic: Confinement Service"
+            android:textSize="24sp"
+            android:textStyle="italic" />
 
         <Button
-            android:id="@+id/button_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="173dp" />
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/login" />
 
         <Button
-            android:id="@+id/button_register"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/register"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="240dp" />
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/register" />
 
         <Button
-            android:id="@+id/button_reset_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/reset_password"
-            tools:layout_editor_absoluteX="16dp"
-            tools:layout_editor_absoluteY="312dp" />
+            android:id="@+id/btn_reset_password"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/reset_password" />
+
+        <Button
+            android:id="@+id/btn_location"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:backgroundTint="@color/colorAccent"
+            android:text="@string/location" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

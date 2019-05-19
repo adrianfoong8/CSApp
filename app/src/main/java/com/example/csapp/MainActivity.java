@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private List<ColorSpace.Model> list;
     private RecyclerView mRecyclerView;
     private TextView txtTotalDonation;
-    private Button buttonLogin, buttonRegister, buttonResetPassword;
+    private Button btnLogin, btnRegister, btnResetPassword, btnLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,27 +54,35 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        buttonLogin = findViewById(R.id.button_login);
-        buttonLogin.setOnClickListener(new View.OnClickListener() {
+        btnLogin = findViewById(R.id.btn_login);
+        btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
 
-        buttonRegister = findViewById(R.id.button_register);
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
+        btnRegister = findViewById(R.id.btn_register);
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, RegisterActivity.class));
             }
         });
 
-        buttonResetPassword = findViewById(R.id.button_reset_password);
-        buttonResetPassword.setOnClickListener(new View.OnClickListener() {
+        btnResetPassword = findViewById(R.id.btn_reset_password);
+        btnResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, ResetPasswordActivity.class));
+            }
+        });
+
+        btnLocation = findViewById(R.id.btn_location);
+        btnLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MapsActivity.class));
             }
         });
     }

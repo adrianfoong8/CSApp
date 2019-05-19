@@ -8,4 +8,8 @@
     <string name="auth_failed">Wrong email or password</string>
     <string name="reset_password">Reset Password</string>
     <string name="confirm_email">Confirm Email</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="location">Location</string>
+    <string name="confinement_service">Confinement Service</string>
 </resources>

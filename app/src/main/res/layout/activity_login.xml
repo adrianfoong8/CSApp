@@ -5,14 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <ProgressBar
-        android:id="@+id/progress_bar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:indeterminate="true"
-        android:visibility="gone" />
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,36 +15,37 @@
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:layout_marginTop="16dp"
             android:src="@mipmap/ic_launcher_round" />
 
         <android.support.design.widget.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp">
 
-            <EditText
-                android:id="@+id/email"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
                 android:inputType="textEmailAddress"
-                android:singleLine="true"
-                android:textColor="@color/colorPrimaryText" />
+                android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp">
 
-            <EditText
-                android:id="@+id/old_password"
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:singleLine="true"
-                android:textColor="@color/colorPrimaryText" />
+                android:singleLine="true" />
         </android.support.design.widget.TextInputLayout>
 
         <Button
@@ -62,7 +55,6 @@
             android:layout_marginTop="32dp"
             android:backgroundTint="@color/colorAccent"
             android:text="@string/login"
-            android:textColor="@color/colorIcons"
             android:textStyle="bold" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
