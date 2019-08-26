@@ -32,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         register = findViewById(R.id.btn_register);
         email = findViewById(R.id.et_email);
         password = findViewById(R.id.et_password);
-        confirmPassword = findViewById(R.id.confirm_password);
+        confirmPassword = findViewById(R.id.et_confirm_password);
 
         register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +80,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(RegisterActivity.this, "Authentication failed" + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    startActivity(new Intent(RegisterActivity.this, LoginMenuActivity.class));
+                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
                                     finish();
                                 }
                             }

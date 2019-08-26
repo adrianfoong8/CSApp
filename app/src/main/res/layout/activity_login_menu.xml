@@ -12,55 +12,50 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginBottom="32dp"
-            android:src="@mipmap/ic_launcher_round" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/existing_user"
-            android:textSize="32sp"
-            android:textStyle="bold" />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="@string/existing_user"-->
+            <!--android:textSize="32sp"-->
+            <!--android:textStyle="bold" />-->
 
         <Button
             android:id="@+id/btn_login"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:backgroundTint="@color/colorAccent"
-            android:text="@string/login"
+            android:text="Login as CL"
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/btn_reset_password"
+            android:id="@+id/btn_login2"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_marginBottom="32dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:backgroundTint="@color/colorAccent"
-            android:text="@string/forgot_password"
+            android:text="Login as Mothers (Soon)"
             android:textStyle="bold" />
 
         <ImageView
             android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:layout_height="1dp"
             android:background="@android:color/darker_gray" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="32dp"
-            android:text="@string/new_user"
-            android:textSize="32sp"
-            android:textStyle="bold" />
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:text="@string/new_user"-->
+            <!--android:textSize="32sp"-->
+            <!--android:textStyle="bold" />-->
 
         <Button
             android:id="@+id/btn_register"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:backgroundTint="@color/colorAccent"
             android:text="@string/register"
             android:textStyle="bold" />

@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class LoginMenuActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
-    private Button btnLogin, btnRegister, btnResetPassword;
+    private Button btnLogin, btnRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +26,6 @@ public class LoginMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginMenuActivity.this, LoginActivity.class));
-            }
-        });
-
-        btnResetPassword = findViewById(R.id.btn_reset_password);
-        btnResetPassword.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginMenuActivity.this, ResetPasswordActivity.class));
             }
         });
 

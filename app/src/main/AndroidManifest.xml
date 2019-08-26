@@ -3,11 +3,6 @@
     package="com.example.csapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality.
-    -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
@@ -17,12 +12,33 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginMenuActivity"></activity>
+        <activity
+            android:name=".ViewPackageDetailActivity"
+            android:label="Package Detail"
+            android:parentActivityName=".ViewPackageActivity" />
+        <activity android:name=".ViewPackageHolder" />
+        <activity
+            android:name=".AddPackageActivity"
+            android:label="Add Package"
+            android:parentActivityName=".UserProfileActivity" />
+        <activity
+            android:name=".ViewPackageActivity"
+            android:label="Package"
+            android:parentActivityName=".UserProfileActivity" />
+        <activity
+            android:name=".UserProfileActivity"
+            android:label="@string/profile"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".AddDetailActivity"
+            android:label="Add Your Details" />
+        <activity android:name=".LoginMenuActivity" />
         <activity android:name=".AddProfileActivity" />
         <activity android:name=".ViewProfileActivity" />
         <activity
             android:name=".AboutUsActivity"
-            android:label="@string/about_us" />
+            android:label="@string/about_us"
+            android:parentActivityName=".MainActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -31,25 +47,22 @@
              sign the APK for publishing.
              You can define the keys for the debug and release targets in src/debug/ and src/release/.
         -->
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="@string/google_maps_key" />
-
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".ResetPasswordActivity"
-            android:label="@string/reset_password" />
+            android:label="@string/reset_password"
+            android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".RegisterActivity"
-            android:label="@string/register" />
+            android:label="@string/register"
+            android:parentActivityName=".LoginActivity" />
         <activity
             android:name=".LoginActivity"
-            android:label="@string/login" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/confinement_service" />
+            android:label="@string/login"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".MainActivity" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
@@ -59,6 +72,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
     </application>
 
 </manifest>

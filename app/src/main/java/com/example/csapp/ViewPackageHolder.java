@@ -1,6 +1,8 @@
 package com.example.csapp;
 
 import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,12 +10,12 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-public class ViewHolder extends RecyclerView.ViewHolder {
+public class ViewPackageHolder  extends RecyclerView.ViewHolder {
 
     View view;
     private ViewHolder.ClickListener clickListener;
 
-    public ViewHolder(View itemView) {
+    public ViewPackageHolder(View itemView) {
         super(itemView);
         view = itemView;
 
@@ -33,16 +35,14 @@ public class ViewHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setDetails(Context ctx, String title, String description, String distance, String image) {
-        TextView tvName = view.findViewById(R.id.cv_name);
-        TextView tvDescription = view.findViewById(R.id.cv_description);
-        TextView tvDistance = view.findViewById(R.id.cv_distance);
-        ImageView ivProfile = view.findViewById(R.id.iv_profile);
+    public void setDetails(Context ctx, String packageName, String packagePrice, String packageDescription) {
+        TextView tvPackageName = view.findViewById(R.id.cv_package_name);
+        TextView tvPackagePrice = view.findViewById(R.id.cv_package_price);
+        TextView tvPackageDescription = view.findViewById(R.id.cv_package_description);
 
-        tvName.setText(title);
-        tvDescription.setText(description);
-        tvDistance.setText(distance);
-        Picasso.get().load(image).into(ivProfile);
+        tvPackageName.setText(packageName);
+        tvPackagePrice.setText(packagePrice);
+        tvPackageDescription.setText(packageDescription);
     }
 
     public void setOnClickListener(ViewHolder.ClickListener clickListener) {

@@ -27,6 +27,10 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -37,6 +41,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     Location mLocation;
     Marker mMarker;
     FusedLocationProviderClient mFusedLocationProviderClient;
+    Double dLatitude, dLongitude;
+    String latitude, longitude;
+    DatabaseReference ref;
     private GoogleMap mMap;
     LocationCallback mLocationCallback = new LocationCallback() {
         @Override
@@ -46,6 +53,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //The last location in the list is the newest
                 Location location = locationList.get(locationList.size() - 1);
                 Log.i("MapsActivity", "Location: " + location.getLatitude() + " " + location.getLongitude());
+
+                dLatitude = location.getLatitude();
+                dLongitude = location.getLongitude();
+                latitude = dLatitude.toString();
+                longitude = dLongitude.toString();
+                UploadLocation uploadLocation = new UploadLocation(latitude, longitude);
+                final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                String imageUploadId = user.getUid();
+                ref = FirebaseDatabase.getInstance().getReference().child("Users");
+                ref.child(imageUploadId).child("location").setValue(uploadLocation);
                 mLocation = location;
                 if (mMarker != null) {
                     mMarker.remove();
@@ -91,8 +108,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(120000); // two minute interval
-        mLocationRequest.setFastestInterval(120000);
+        mLocationRequest.setInterval(5000); // two minute interval
+        mLocationRequest.setFastestInterval(5000);
         mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

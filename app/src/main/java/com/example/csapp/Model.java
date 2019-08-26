@@ -2,23 +2,24 @@ package com.example.csapp;
 
 public class Model {
 
-    String name, description, image;
+    String lastName, description, distance, image;
 
     public Model() {
     }
 
-    public Model(String name, String description, String image) {
-        this.name = name;
+    public Model(String lastName, String description, String distance, String image) {
+        this.lastName = lastName;
         this.description = description;
+        this.distance = distance;
         this.image = image;
     }
 
-    public String getName() {
-        return name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getDescription() {
@@ -27,6 +28,14 @@ public class Model {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getDistance() {
+        return distance;
+    }
+
+    public void setDistance(String distance) {
+        this.distance = distance;
     }
 
     public String getImage() {

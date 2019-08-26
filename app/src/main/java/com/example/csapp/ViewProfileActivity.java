@@ -21,7 +21,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         tvDescription = findViewById(R.id.tv_description);
         ivProfile = findViewById(R.id.iv_profile);
 
-        String name = getIntent().getStringExtra("name");
+        String name = getIntent().getStringExtra("firstName");
         String description = getIntent().getStringExtra("description");
         String image = getIntent().getStringExtra("image");
 

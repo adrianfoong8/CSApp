@@ -19,7 +19,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
     private FirebaseAuth auth;
-    private Button btnLogin;
+    private Button btnLogin, btnRegister, btnResetPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +70,22 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
+            }
+        });
+
+        btnRegister = findViewById(R.id.btn_register);
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+            }
+        });
+
+        btnResetPassword = findViewById(R.id.btn_reset_password);
+        btnResetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));
             }
         });
     }

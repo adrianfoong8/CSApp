@@ -1,80 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_main"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toTopOf="@id/aaa"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/aaa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/aa">
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_weight="1"
-            android:backgroundTint="@color/colorAccent"
-            android:text="Logout" />
+            android:layout_width="42dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@android:color/transparent"
+            android:text="@string/login" />
 
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_weight="1"
-            android:backgroundTint="@color/colorAccent"
-            android:text="" />
+        <ImageView
+            android:id="@+id/iv_main_profile"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:visibility="gone" />
 
-        <Button
-            android:id="@+id/btn_reset_password"
-            android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_weight="1"
-            android:backgroundTint="@color/colorAccent"
-            android:text="" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/aa"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <Button
-            android:id="@+id/btn_location"
-            android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_weight="1"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/location" />
-
-        <Button
-            android:id="@+id/btn_about_us"
-            android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_weight="1"
-            android:backgroundTint="@color/colorAccent"
-            android:text="About Us" />
-
-        <Button
-            android:id="@+id/btn_add"
-            android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
-            android:layout_weight="1"
-            android:backgroundTint="@color/colorAccent"
-            android:text="Add" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
