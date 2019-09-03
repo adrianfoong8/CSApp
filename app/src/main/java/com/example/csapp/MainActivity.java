@@ -11,13 +11,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -40,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference ref, ref2;
     private List<ColorSpace.Model> list;
     private RecyclerView recyclerView;
-    private TextView txtTotalDonation;
-    private Button btnLogin;
+    private TextView tvName, tvApproval;
+    private Button btnLogin, btnApply;
     private ImageView ivMainProfile;
     private MenuItem menuItem;
 
@@ -60,8 +58,6 @@ public class MainActivity extends AppCompatActivity {
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
 
-        ivMainProfile = findViewById(R.id.iv_main_profile);
-
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -76,12 +72,23 @@ public class MainActivity extends AppCompatActivity {
                     ref2.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if (dataSnapshot!=null && dataSnapshot.getChildren()!=null &&
+                            if (dataSnapshot != null && dataSnapshot.getChildren() != null &&
                                     dataSnapshot.getChildren().iterator().hasNext()) {
-                                ivMainProfile.setVisibility(View.VISIBLE);
+                                tvName = findViewById(R.id.tv_name);
+                                tvApproval = findViewById(R.id.tv_approval);
+                                btnApply = findViewById(R.id.btn_apply);
                                 btnLogin.setVisibility(View.GONE);
+                                String name = dataSnapshot.child("firstName").getValue().toString()
+                                        + " " + dataSnapshot.child("lastName").getValue().toString();
+                                tvName.setText(name);
                                 String image = dataSnapshot.child("image").getValue().toString();
                                 Picasso.get().load(image).into(ivMainProfile);
+                                ivMainProfile.setVisibility(View.VISIBLE);
+                                tvName.setVisibility(View.VISIBLE);
+                                if (dataSnapshot.child("accountType").getValue().toString().equals("m")) {
+                                    tvApproval.setVisibility(View.VISIBLE);
+                                    btnApply.setVisibility(View.VISIBLE);
+                                }
                             } else {
                                 startActivity(new Intent(MainActivity.this, AddDetailActivity.class));
                                 finish();
@@ -93,10 +100,13 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                     });
+                } else {
+                    btnLogin.setVisibility(View.VISIBLE);
                 }
             }
         };
 
+        ivMainProfile = findViewById(R.id.iv_main_profile);
         ivMainProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -104,6 +114,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        tvName = findViewById(R.id.tv_name);
+        tvName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, UserProfileActivity.class));
+            }
+        });
+
+        tvApproval = findViewById(R.id.tv_approval);
+        tvApproval.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, UserProfileActivity.class));
+            }
+        });
 
         btnLogin = findViewById(R.id.btn_login);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.action_bar, menu);
+        menuInflater.inflate(R.menu.main_action_bar, menu);
         return true;
     }
 
@@ -177,6 +202,9 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_about_us:
                 startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+                return true;
+            case R.id.menu_account_settings:
+                startActivity(new Intent(MainActivity.this, AccountSettingsActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -187,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
     public void logout() {
         Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
         auth.signOut();
+        btnLogin.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -200,6 +229,9 @@ public class MainActivity extends AppCompatActivity {
                     // user auth state is changed - user is null
                     // launch login activity
                     ivMainProfile.setVisibility(View.GONE);
+                    tvName.setVisibility(View.GONE);
+                    tvApproval.setVisibility(View.GONE);
+                    btnApply.setVisibility(View.GONE);
                     btnLogin.setVisibility(View.VISIBLE);
                 }
             }
@@ -258,60 +290,60 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         auth.addAuthStateListener(authListener);
 
-        FirebaseRecyclerAdapter<Model, ViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(
-                Model.class, R.layout.view_holder, ViewHolder.class, ref) {
-            @Override
-            protected void populateViewHolder(ViewHolder viewHolder, Model model, int position) {
-                viewHolder.setDetails(getApplicationContext(), model.getLastName(), model.getDescription(), model.getDistance(), model.getImage());
-            }
-
-            @Override
-            public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
-                viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        String lastName = getItem(position).getLastName();
-                        String description = getItem(position).getDescription();
-                        String image = getItem(position).getImage();
-
-                        Intent intent = new Intent(view.getContext(), ViewProfileActivity.class);
-                        intent.putExtra("lastName", lastName);
-                        intent.putExtra("description", description);
-                        intent.putExtra("image", image);
-                        startActivity(intent);
-                    }
-
-                    @Override
-                    public void onItemLongClick(View view, int position) {
-//                        final String name = getItem(position).getLastName();
-//                        final String description = getItem(position).getDescription();
-//                        final String image = getItem(position).getImage();
+//        FirebaseRecyclerAdapter<Model, ViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(
+//                Model.class, R.layout.view_holder, ViewHolder.class, ref) {
+//            @Override
+//            protected void populateViewHolder(ViewHolder viewHolder, Model model, int position) {
+//                viewHolder.setDetails(getApplicationContext(), model.getLastName(), model.getDescription(), model.getDistance(), model.getImage());
+//            }
 //
-//                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-//                        String[] options = {"Update", "Delete"};
-//                        builder.setItems(options, new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                if (which == 0) {
-//                                    Intent intent = new Intent(MainActivity.this, AddProfileActivity.class);
-//                                    intent.putExtra("firstName", name);
-//                                    intent.putExtra("description", description);
-//                                    intent.putExtra("image", image);
-//                                    startActivity(intent);
-//                                }
-//                                if (which == 1) {
-//                                    showDeleteDialog(name, image);
-//                                }
-//                            }
-//                        });
-//                        builder.create().show();
-                    }
-                });
-                return viewHolder;
-            }
-        };
-        recyclerView.setAdapter(firebaseRecyclerAdapter);
+//            @Override
+//            public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//                ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
+//                viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
+//                    @Override
+//                    public void onItemClick(View view, int position) {
+//                        String lastName = getItem(position).getLastName();
+//                        String description = getItem(position).getDescription();
+//                        String image = getItem(position).getImage();
+//
+//                        Intent intent = new Intent(view.getContext(), ViewProfileActivity.class);
+//                        intent.putExtra("lastName", lastName);
+//                        intent.putExtra("description", description);
+//                        intent.putExtra("image", image);
+//                        startActivity(intent);
+//                    }
+//
+//                    @Override
+//                    public void onItemLongClick(View view, int position) {
+////                        final String name = getItem(position).getLastName();
+////                        final String description = getItem(position).getDescription();
+////                        final String image = getItem(position).getImage();
+////
+////                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+////                        String[] options = {"Update", "Delete"};
+////                        builder.setItems(options, new DialogInterface.OnClickListener() {
+////                            @Override
+////                            public void onClick(DialogInterface dialog, int which) {
+////                                if (which == 0) {
+////                                    Intent intent = new Intent(MainActivity.this, AddProfileActivity.class);
+////                                    intent.putExtra("firstName", name);
+////                                    intent.putExtra("description", description);
+////                                    intent.putExtra("image", image);
+////                                    startActivity(intent);
+////                                }
+////                                if (which == 1) {
+////                                    showDeleteDialog(name, image);
+////                                }
+////                            }
+////                        });
+////                        builder.create().show();
+//                    }
+//                });
+//                return viewHolder;
+//            }
+//        };
+//        recyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 
     @Override

@@ -42,6 +42,11 @@
     <string name="price">Price</string>
     <string name="package_description">Package Description</string>
     <string name="package_price">Package Price</string>
+    <string name="approval_pending">Approval Pending</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="profile_settings">Profile Settings</string>
+    <string name="package_manager">Package Manager</string>
+    <string name="apply">Apply</string>
 
     <string-array name="nationality">
         <item>Select</item>

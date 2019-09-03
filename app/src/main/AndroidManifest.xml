@@ -13,6 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".PackageManagerActivity"
+            android:label="@string/package_manager"
+            android:parentActivityName=".AccountSettingsActivity" />
+        <activity
+            android:name=".AccountSettingsActivity"
+            android:label="@string/account_settings"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".ViewPackageDetailActivity"
             android:label="Package Detail"
             android:parentActivityName=".ViewPackageActivity" />
@@ -20,11 +28,11 @@
         <activity
             android:name=".AddPackageActivity"
             android:label="Add Package"
-            android:parentActivityName=".UserProfileActivity" />
+            android:parentActivityName=".PackageManagerActivity" />
         <activity
             android:name=".ViewPackageActivity"
             android:label="Package"
-            android:parentActivityName=".UserProfileActivity" />
+            android:parentActivityName=".PackageManagerActivity" />
         <activity
             android:name=".UserProfileActivity"
             android:label="@string/profile"

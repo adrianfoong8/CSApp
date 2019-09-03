@@ -156,36 +156,4 @@
                 android:text="map" />
         </LinearLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:padding="16dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:orientation="vertical">
-
-        <Button
-            android:id="@+id/btn_logout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/logout"/>
-
-        <Button
-            android:id="@+id/btn_add_package"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/add_package" />
-
-        <Button
-            android:id="@+id/btn_view_package"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:backgroundTint="@color/colorAccent"
-            android:text="@string/view_package" />
-    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

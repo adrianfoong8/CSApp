@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -25,7 +28,7 @@ public class UserProfileActivity extends AppCompatActivity {
     TextView tvName, tvDateOfBirth, tvAge, tvPhoneNumber, tvNationality, tvState, tvDescription,
             tvLocation;
     ImageView ivProfile;
-    Button btnLogout, btnMap, btnAddPackage, btnViewPackage;
+    Button btnMap;
     FirebaseAuth auth;
 
     @Override
@@ -45,37 +48,11 @@ public class UserProfileActivity extends AppCompatActivity {
 
         auth = FirebaseAuth.getInstance();
 
-        btnLogout = findViewById(R.id.btn_logout);
-
-        btnLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logout();
-                finish();
-            }
-        });
-
         btnMap = findViewById(R.id.btnMap);
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(UserProfileActivity.this, MapsActivity.class));
-            }
-        });
-
-        btnAddPackage=findViewById(R.id.btn_add_package);
-        btnAddPackage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(UserProfileActivity.this,AddPackageActivity.class));
-            }
-        });
-
-        btnViewPackage=findViewById(R.id.btn_view_package);
-        btnViewPackage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(UserProfileActivity.this,ViewPackageActivity.class));
             }
         });
 
@@ -124,6 +101,25 @@ public class UserProfileActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.user_profile_action_bar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_logout:
+                logout();
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void logout() {
