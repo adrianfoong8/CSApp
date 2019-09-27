@@ -8,18 +8,18 @@ import android.widget.Button;
 
 public class AccountSettingsActivity extends AppCompatActivity {
 
-    private Button btnProfileSettings, btnPackageManager;
+    private Button btnMyProfile, btnPackageManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_settings);
 
-        btnProfileSettings = findViewById(R.id.btn_profile_settings);
-        btnProfileSettings.setOnClickListener(new View.OnClickListener() {
+        btnMyProfile = findViewById(R.id.btn_my_profile);
+        btnMyProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(AccountSettingsActivity.this, UserProfileActivity.class));
             }
         });
         btnPackageManager = findViewById(R.id.btn_package_manager);

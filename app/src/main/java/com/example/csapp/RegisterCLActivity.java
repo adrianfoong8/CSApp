@@ -15,7 +15,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class RegisterActivity extends AppCompatActivity {
+public class RegisterCLActivity extends AppCompatActivity {
 
     private EditText email, password, confirmPassword;
     private Button register;
@@ -24,7 +24,7 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
+        setContentView(R.layout.activity_register_cl);
 
         //Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -38,9 +38,9 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String email = RegisterActivity.this.email.getText().toString().trim();
-                String password = RegisterActivity.this.password.getText().toString().trim();
-                String confirm_password = RegisterActivity.this.confirmPassword.getText().toString().trim();
+                String email = RegisterCLActivity.this.email.getText().toString().trim();
+                String password = RegisterCLActivity.this.password.getText().toString().trim();
+                String confirm_password = RegisterCLActivity.this.confirmPassword.getText().toString().trim();
 
                 if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter email", Toast.LENGTH_SHORT).show();
@@ -62,30 +62,29 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
 
-                if(!(confirm_password.equals(password))){
+                if (!(confirm_password.equals(password))) {
                     Toast.makeText(getApplicationContext(), "Passwords do not match", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
                 //create user
                 auth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(RegisterActivity.this, new OnCompleteListener<AuthResult>() {
+                        .addOnCompleteListener(RegisterCLActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                Toast.makeText(RegisterActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(RegisterCLActivity.this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
                                 // If sign in fails, display a message to the user. If sign in succeeds
                                 // the auth state listener will be notified and logic to handle the
                                 // signed in user can be handled in the listener.
                                 if (!task.isSuccessful()) {
-                                    Toast.makeText(RegisterActivity.this, "Authentication failed" + task.getException(),
+                                    Toast.makeText(RegisterCLActivity.this, "Authentication failed" + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                                    startActivity(new Intent(RegisterCLActivity.this, AddUserDetailCLActivity.class));
                                     finish();
                                 }
                             }
                         });
-
             }
         });
     }

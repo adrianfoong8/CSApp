@@ -5,7 +5,6 @@ import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,18 +38,20 @@ public class MainActivity extends AppCompatActivity {
     private List<ColorSpace.Model> list;
     private RecyclerView recyclerView;
     private TextView tvName, tvApproval;
-    private Button btnLogin, btnApply;
+    private Button btnApply;
     private ImageView ivMainProfile;
-    private MenuItem menuItem;
+    private boolean isLogin = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        recyclerView = findViewById(R.id.rv_main);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        tvName = findViewById(R.id.tv_name);
+        tvApproval = findViewById(R.id.tv_approval);
+//        recyclerView = findViewById(R.id.rv_main);
+//        recyclerView.setHasFixedSize(true);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         ref = firebaseDatabase.getReference("Users");
@@ -74,10 +75,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot != null && dataSnapshot.getChildren() != null &&
                                     dataSnapshot.getChildren().iterator().hasNext()) {
-                                tvName = findViewById(R.id.tv_name);
-                                tvApproval = findViewById(R.id.tv_approval);
-                                btnApply = findViewById(R.id.btn_apply);
-                                btnLogin.setVisibility(View.GONE);
+                                isLogin = true;
                                 String name = dataSnapshot.child("firstName").getValue().toString()
                                         + " " + dataSnapshot.child("lastName").getValue().toString();
                                 tvName.setText(name);
@@ -85,13 +83,14 @@ public class MainActivity extends AppCompatActivity {
                                 Picasso.get().load(image).into(ivMainProfile);
                                 ivMainProfile.setVisibility(View.VISIBLE);
                                 tvName.setVisibility(View.VISIBLE);
-                                if (dataSnapshot.child("accountType").getValue().toString().equals("m")) {
+                                if (dataSnapshot.child("accountType").getValue().toString().equals("cl")
+                                        && dataSnapshot.child("verified").getValue().toString().equals("f")) {
                                     tvApproval.setVisibility(View.VISIBLE);
                                     btnApply.setVisibility(View.VISIBLE);
                                 }
                             } else {
-                                startActivity(new Intent(MainActivity.this, AddDetailActivity.class));
-                                finish();
+//                                startActivity(new Intent(MainActivity.this, AddUserDetailCLActivity.class));
+//                                finish();
                             }
                         }
 
@@ -101,7 +100,6 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
                 } else {
-                    btnLogin.setVisibility(View.VISIBLE);
                 }
             }
         };
@@ -130,11 +128,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnLogin = findViewById(R.id.btn_login);
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        btnApply = findViewById(R.id.btn_apply);
+        btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                startActivity(new Intent(MainActivity.this, ApplyActivity.class));
             }
         });
 
@@ -150,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 //        btnLogout.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-////                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+////                startActivity(new Intent(MainActivity.this, RegisterCLActivity.class));
 //                logout();
 //            }
 //        });
@@ -185,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
 //        btnAddPackage.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, AddDetailActivity.class));
+//                startActivity(new Intent(MainActivity.this, AddUserDetailCLActivity.class));
 //            }
 //        });
     }
@@ -198,24 +196,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(final Menu menu) {
+        if (isLogin) {
+            menu.findItem(R.id.menu_account_settings).setVisible(true);
+            menu.findItem(R.id.menu_logout).setVisible(true);
+            menu.findItem(R.id.menu_login).setVisible(false);
+        } else {
+            menu.findItem(R.id.menu_account_settings).setVisible(false);
+            menu.findItem(R.id.menu_logout).setVisible(false);
+            menu.findItem(R.id.menu_login).setVisible(true);
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_about_us:
-                startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+            case R.id.menu_logout:
+                logout();
                 return true;
             case R.id.menu_account_settings:
                 startActivity(new Intent(MainActivity.this, AccountSettingsActivity.class));
+                return true;
+            case R.id.menu_login:
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-    //sign out method
     public void logout() {
         Toast.makeText(MainActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
         auth.signOut();
-        btnLogin.setVisibility(View.VISIBLE);
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
     }
 
     @Override
@@ -228,11 +245,11 @@ public class MainActivity extends AppCompatActivity {
                 if (user == null) {
                     // user auth state is changed - user is null
                     // launch login activity
+                    isLogin = false;
                     ivMainProfile.setVisibility(View.GONE);
                     tvName.setVisibility(View.GONE);
                     tvApproval.setVisibility(View.GONE);
                     btnApply.setVisibility(View.GONE);
-                    btnLogin.setVisibility(View.VISIBLE);
                 }
             }
         };

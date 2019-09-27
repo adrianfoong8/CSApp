@@ -36,39 +36,35 @@ import java.util.Calendar;
 
 import static com.google.firebase.storage.FirebaseStorage.getInstance;
 
-public class AddDetailActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class AddUserDetailMActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     EditText etFirstName, etLastName, etAge, etDateOfBirth, etPhoneNumber, etDescription;
     ImageView ivProfilePicture;
     Button btnNext;
 
-    String mStoragePath = "Images/";
+    String mStoragePath = "Images/Profile Pictures/";
     String mDatabasePath = "Users";
     Uri mFilePathUri;
     DatabaseReference mDatabaseReference;
     ProgressDialog mProgressDialog;
     int IMAGE_REQUEST_CODE = 5;
-    String accountType, firstName, lastName, dateOfBirth, age, phoneNumber, nationality, state,
-            description, image;
-    Spinner spNationality, spState, spAccountType;
+    String accountType, firstName, lastName, dateOfBirth, age, phoneNumber, state, image;
+    Spinner spState;
     private StorageReference mStorageReference;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_profile);
+        setContentView(R.layout.activity_add_user_detail);
 
         etFirstName = findViewById(R.id.et_first_name);
         etLastName = findViewById(R.id.et_last_name);
         etDateOfBirth = findViewById(R.id.et_date_of_birth);
         etAge = findViewById(R.id.et_age);
-        etDescription = findViewById(R.id.et_description);
         ivProfilePicture = findViewById(R.id.iv_profile_picture);
         btnNext = findViewById(R.id.btn_next);
-        spNationality = findViewById(R.id.sp_nationality);
         spState = findViewById(R.id.sp_state);
-        spAccountType = findViewById(R.id.sp_account_type);
         etPhoneNumber = findViewById(R.id.et_phone_number);
 
         etDateOfBirth.setOnClickListener(new View.OnClickListener() {
@@ -79,7 +75,7 @@ public class AddDetailActivity extends AppCompatActivity implements AdapterView.
                 int month = calendar.get(Calendar.MONTH);
                 int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                DatePickerDialog dialog = new DatePickerDialog(AddDetailActivity.this, mDateSetListener, year, month, day);
+                DatePickerDialog dialog = new DatePickerDialog(AddUserDetailMActivity.this, mDateSetListener, year, month, day);
                 dialog.show();
             }
         });
@@ -99,19 +95,9 @@ public class AddDetailActivity extends AppCompatActivity implements AdapterView.
             }
         };
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.nationality, android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.state, android.R.layout.simple_spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spNationality.setAdapter(adapter);
-        spNationality.setOnItemSelectedListener(this);
-
-        ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.account_type, android.R.layout.simple_spinner_dropdown_item);
-        adapter2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spAccountType.setAdapter(adapter2);
-        spAccountType.setOnItemSelectedListener(this);
-
-        ArrayAdapter<CharSequence> adapter3 = ArrayAdapter.createFromResource(this, R.array.state, android.R.layout.simple_spinner_dropdown_item);
-        adapter3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spState.setAdapter(adapter3);
+        spState.setAdapter(adapter);
         spState.setOnItemSelectedListener(this);
 
 //        Bundle intent = getIntent().getExtras();
@@ -158,7 +144,7 @@ public class AddDetailActivity extends AppCompatActivity implements AdapterView.
 
         mStorageReference = getInstance().getReference();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference(mDatabasePath);
-        mProgressDialog = new ProgressDialog(AddDetailActivity.this);
+        mProgressDialog = new ProgressDialog(AddUserDetailMActivity.this);
     }
 
 //    private void beginUpdate() {
@@ -172,13 +158,13 @@ public class AddDetailActivity extends AppCompatActivity implements AdapterView.
 //        mPictureRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
 //            @Override
 //            public void onSuccess(Void aVoid) {
-//                Toast.makeText(AddDetailActivity.this, "Previous image deleted.", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AddUserDetailCLActivity.this, "Previous image deleted.", Toast.LENGTH_SHORT).show();
 //                uploadNewImage();
 //            }
 //        }).addOnFailureListener(new OnFailureListener() {
 //            @Override
 //            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(AddDetailActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AddUserDetailCLActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 //                mProgressDialog.dismiss();
 //            }
 //        });
@@ -195,7 +181,7 @@ public class AddDetailActivity extends AppCompatActivity implements AdapterView.
 //        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
 //            @Override
 //            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                Toast.makeText(AddDetailActivity.this, "New image uploaded.", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AddUserDetailCLActivity.this, "New image uploaded.", Toast.LENGTH_SHORT).show();
 //
 //                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
 //                while (!uriTask.isSuccessful()) ;
@@ -205,7 +191,7 @@ public class AddDetailActivity extends AppCompatActivity implements AdapterView.
 //        }).addOnFailureListener(new OnFailureListener() {
 //            @Override
 //            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(AddDetailActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(AddUserDetailCLActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 //                mProgressDialog.dismiss();
 //            }
 //        });
@@ -241,8 +227,8 @@ public class AddDetailActivity extends AppCompatActivity implements AdapterView.
 //                    ds.getRef().child("image").setValue(image);
 //                }
 //                mProgressDialog.dismiss();
-//                Toast.makeText(AddDetailActivity.this, "Data updated.", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(AddDetailActivity.this, MainActivity.class));
+//                Toast.makeText(AddUserDetailCLActivity.this, "Data updated.", Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(AddUserDetailCLActivity.this, MainActivity.class));
 //                finish();
 //            }
 //
@@ -259,7 +245,6 @@ public class AddDetailActivity extends AppCompatActivity implements AdapterView.
             mProgressDialog.show();
             StorageReference storageReference2 = mStorageReference.child(mStoragePath +
                     System.currentTimeMillis() + "." + getFileExtention(mFilePathUri));
-
             storageReference2.putFile(mFilePathUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -268,28 +253,29 @@ public class AddDetailActivity extends AppCompatActivity implements AdapterView.
                             while (!uriTask.isSuccessful()) ;
                             Uri downloadUri = uriTask.getResult();
 
-                            String accountType = spAccountType.getSelectedItem().toString().trim();
+                            String accountType = "m";
+                            String verified = "t";
                             String firstName = etFirstName.getText().toString().trim();
                             String lastName = etLastName.getText().toString().trim();
                             String dateOfBirth = etDateOfBirth.getText().toString().trim();
                             String age = etAge.getText().toString().trim();
                             String phoneNumber = etPhoneNumber.getText().toString().trim();
-                            String nationality = spNationality.getSelectedItem().toString().trim();
                             String state = spState.getSelectedItem().toString().trim();
-                            String description = etDescription.getText().toString().trim();
                             mProgressDialog.dismiss();
-                            Toast.makeText(AddDetailActivity.this, "Uploaded successfully.",
+                            Toast.makeText(AddUserDetailMActivity.this, "Uploaded successfully.",
                                     Toast.LENGTH_SHORT).show();
 
                             UploadInformation uploadInformation = new UploadInformation(accountType,
-                                    firstName, lastName, dateOfBirth, age, phoneNumber, nationality,
-                                    state, description, downloadUri.toString());
+                                    verified, firstName, lastName, dateOfBirth, age, phoneNumber,
+                                    state, downloadUri.toString());
 
 //                            String imageUploadId = mDatabaseReference.push().getKey();
                             final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                             String imageUploadId = user.getUid();
                             mDatabaseReference.child(imageUploadId).setValue(uploadInformation);
-                            startActivity(new Intent(AddDetailActivity.this, MainActivity.class));
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
                             finish();
                         }
                     })
@@ -297,7 +283,7 @@ public class AddDetailActivity extends AppCompatActivity implements AdapterView.
                         @Override
                         public void onFailure(@NonNull Exception e) {
                             mProgressDialog.dismiss();
-                            Toast.makeText(AddDetailActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddUserDetailMActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     })
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {

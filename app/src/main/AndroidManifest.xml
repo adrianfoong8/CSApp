@@ -13,6 +13,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ChangePasswordActivity"
+            android:label="@string/change_password"
+            android:parentActivityName=".UserProfileActivity" />
+        <activity
+            android:name=".Apply2Activity"
+            android:label="@string/submit_identity_card"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".ApplyActivity"
+            android:label="@string/submit_selfie"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".AddUserDetailMActivity"
+            android:label="Add Your Details" />
+        <activity
+            android:name=".RegisterMActivity"
+            android:label="@string/register"
+            android:parentActivityName=".RegisterMenuActivity" />
+        <activity
+            android:name=".RegisterMenuActivity"
+            android:label="@string/register"
+            android:parentActivityName=".LoginActivity" />
+        <activity
             android:name=".PackageManagerActivity"
             android:label="@string/package_manager"
             android:parentActivityName=".AccountSettingsActivity" />
@@ -38,10 +61,8 @@
             android:label="@string/profile"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".AddDetailActivity"
+            android:name=".AddUserDetailCLActivity"
             android:label="Add Your Details" />
-        <activity android:name=".LoginMenuActivity" />
-        <activity android:name=".AddProfileActivity" />
         <activity android:name=".ViewProfileActivity" />
         <activity
             android:name=".AboutUsActivity"
@@ -63,9 +84,9 @@
             android:label="@string/reset_password"
             android:parentActivityName=".LoginActivity" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".RegisterCLActivity"
             android:label="@string/register"
-            android:parentActivityName=".LoginActivity" />
+            android:parentActivityName=".RegisterMenuActivity" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/login"

@@ -3,36 +3,37 @@ package com.example.csapp;
 public class UploadInformation {
 
     String accountType;
+    String verified;
     String firstName;
     String lastName;
     String dateOfBirth;
     String age;
     String phoneNumber;
-    String nationality;
     String state;
-    String description;
     String image;
 
     public UploadInformation() {
     }
 
-    public UploadInformation(String accountType, String firstName, String lastName, String dateOfBirth,
-                             String age, String phoneNumber, String nationality, String state,
-                             String description, String image) {
+    public UploadInformation(String accountType,String verified, String firstName, String lastName, String dateOfBirth,
+                             String age, String phoneNumber, String state, String image) {
         this.accountType = accountType;
+        this.verified= verified;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
         this.age = age;
         this.phoneNumber = phoneNumber;
-        this.nationality = nationality;
         this.state = state;
-        this.description = description;
         this.image = image;
     }
 
     public String getAccountType() {
         return accountType;
+    }
+
+    public String getVerified() {
+        return verified;
     }
 
     public String getFirstName() {
@@ -55,16 +56,8 @@ public class UploadInformation {
         return phoneNumber;
     }
 
-    public String getNationality() {
-        return nationality;
-    }
-
     public String getState() {
         return state;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public String getImage() {

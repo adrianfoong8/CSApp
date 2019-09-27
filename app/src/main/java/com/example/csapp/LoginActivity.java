@@ -8,6 +8,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,7 +20,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText etEmail, etPassword;
     private FirebaseAuth auth;
-    private Button btnLogin, btnRegister, btnResetPassword;
+    private Button btnLogin;
+    private TextView tvRegister, tvResetPassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                                     // there was an error
                                     Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                 } else {
-//                                    Intent intent = new Intent(LoginActivity.this, LoginMenuActivity.class);
+//                                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
 //                                    startActivity(intent);
                                     finish();
                                 }
@@ -73,16 +75,16 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        btnRegister = findViewById(R.id.btn_register);
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        tvRegister = findViewById(R.id.tv_register);
+        tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
+                startActivity(new Intent(LoginActivity.this, RegisterMenuActivity.class));
             }
         });
 
-        btnResetPassword = findViewById(R.id.btn_reset_password);
-        btnResetPassword.setOnClickListener(new View.OnClickListener() {
+        tvResetPassword = findViewById(R.id.tv_reset_password);
+        tvResetPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, ResetPasswordActivity.class));

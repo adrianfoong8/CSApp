@@ -4,14 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,10 +21,9 @@ import com.squareup.picasso.Picasso;
 public class UserProfileActivity extends AppCompatActivity {
 
     DatabaseReference ref;
-    TextView tvName, tvDateOfBirth, tvAge, tvPhoneNumber, tvNationality, tvState, tvDescription,
-            tvLocation;
+    TextView tvName, tvDateOfBirth, tvAge, tvPhoneNumber, tvState, tvLocation;
     ImageView ivProfile;
-    Button btnMap;
+    Button btnGetCurrentLocation, btnEditProfile, btnChangePassword;
     FirebaseAuth auth;
 
     @Override
@@ -40,19 +35,25 @@ public class UserProfileActivity extends AppCompatActivity {
         tvDateOfBirth = findViewById(R.id.tv_date_of_birth);
         tvAge = findViewById(R.id.tv_age);
         tvPhoneNumber = findViewById(R.id.tv_phone_number);
-        tvNationality = findViewById(R.id.tv_nationality);
         tvState = findViewById(R.id.tv_state);
-        tvDescription = findViewById(R.id.tv_description);
         tvLocation = findViewById(R.id.tv_location);
         ivProfile = findViewById(R.id.iv_profile);
 
         auth = FirebaseAuth.getInstance();
 
-        btnMap = findViewById(R.id.btnMap);
-        btnMap.setOnClickListener(new View.OnClickListener() {
+        btnGetCurrentLocation = findViewById(R.id.btnGetCurrentLocation);
+        btnGetCurrentLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(UserProfileActivity.this, MapsActivity.class));
+            }
+        });
+
+        btnChangePassword = findViewById(R.id.btn_change_password);
+        btnChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(UserProfileActivity.this, ChangePasswordActivity.class));
             }
         });
 
@@ -67,9 +68,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 String dateOfBirth = dataSnapshot.child("dateOfBirth").getValue().toString();
                 String age = dataSnapshot.child("age").getValue().toString();
                 String phoneNumber = dataSnapshot.child("phoneNumber").getValue().toString();
-                String nationality = dataSnapshot.child("nationality").getValue().toString();
                 String state = dataSnapshot.child("state").getValue().toString();
-                String description = dataSnapshot.child("description").getValue().toString();
                 String latitude;
                 if (dataSnapshot.child("location").child("latitude").getValue() != null) {
                     latitude = dataSnapshot.child("location").child("latitude").getValue().toString();
@@ -89,9 +88,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 tvDateOfBirth.setText(dateOfBirth);
                 tvAge.setText(age);
                 tvPhoneNumber.setText(phoneNumber);
-                tvNationality.setText(nationality);
                 tvState.setText(state);
-                tvDescription.setText(description);
                 tvLocation.setText(location);
                 Picasso.get().load(image).into(ivProfile);
             }
@@ -101,29 +98,5 @@ public class UserProfileActivity extends AppCompatActivity {
 
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.user_profile_action_bar, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_logout:
-                logout();
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    public void logout() {
-        Toast.makeText(UserProfileActivity.this, "Logged out", Toast.LENGTH_SHORT).show();
-        auth.signOut();
     }
 }
