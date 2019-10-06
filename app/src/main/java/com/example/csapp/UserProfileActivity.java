@@ -20,11 +20,12 @@ import com.squareup.picasso.Picasso;
 
 public class UserProfileActivity extends AppCompatActivity {
 
-    DatabaseReference ref;
-    TextView tvName, tvDateOfBirth, tvAge, tvPhoneNumber, tvState, tvLocation;
-    ImageView ivProfile;
-    Button btnGetCurrentLocation, btnEditProfile, btnChangePassword;
-    FirebaseAuth auth;
+    private DatabaseReference ref;
+    private TextView tvName, tvDateOfBirth, tvAge, tvPhoneNumber, tvState, tvLocation;
+    private ImageView ivProfile;
+    private Button btnGetCurrentLocation, btnEditProfile, btnChangePassword;
+    private FirebaseAuth auth;
+//    private Intent editIntent = new Intent(UserProfileActivity.this, EditProfileActivity.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,27 +63,27 @@ public class UserProfileActivity extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String firstName = dataSnapshot.child("firstName").getValue().toString();
-                String lastName = dataSnapshot.child("lastName").getValue().toString();
-                String name = firstName + " " + lastName;
-                String dateOfBirth = dataSnapshot.child("dateOfBirth").getValue().toString();
-                String age = dataSnapshot.child("age").getValue().toString();
-                String phoneNumber = dataSnapshot.child("phoneNumber").getValue().toString();
-                String state = dataSnapshot.child("state").getValue().toString();
-                String latitude;
+                final String firstName = dataSnapshot.child("firstName").getValue().toString();
+                final String lastName = dataSnapshot.child("lastName").getValue().toString();
+                final String name = firstName + " " + lastName;
+                final String dateOfBirth = dataSnapshot.child("dateOfBirth").getValue().toString();
+                final String age = dataSnapshot.child("age").getValue().toString();
+                final String phoneNumber = dataSnapshot.child("phoneNumber").getValue().toString();
+                final String state = dataSnapshot.child("state").getValue().toString();
+                final String latitude;
                 if (dataSnapshot.child("location").child("latitude").getValue() != null) {
                     latitude = dataSnapshot.child("location").child("latitude").getValue().toString();
                 } else {
                     latitude = "?";
                 }
-                String longitude;
+                final String longitude;
                 if (dataSnapshot.child("location").child("longitude").getValue() != null) {
                     longitude = dataSnapshot.child("location").child("longitude").getValue().toString();
                 } else {
                     longitude = "?";
                 }
-                String location = latitude + ", " + longitude;
-                String image = dataSnapshot.child("image").getValue().toString();
+                final String location = latitude + ", " + longitude;
+                final String image = dataSnapshot.child("image").getValue().toString();
 
                 tvName.setText(name);
                 tvDateOfBirth.setText(dateOfBirth);
@@ -91,6 +92,22 @@ public class UserProfileActivity extends AppCompatActivity {
                 tvState.setText(state);
                 tvLocation.setText(location);
                 Picasso.get().load(image).into(ivProfile);
+
+                btnEditProfile = findViewById(R.id.btn_edit_profile);
+                btnEditProfile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent editIntent = new Intent(UserProfileActivity.this, EditProfileActivity.class);
+                        editIntent.putExtra("sLastName", lastName);
+                        editIntent.putExtra("sFirstName", firstName);
+                        editIntent.putExtra("sDateOfBirth", dateOfBirth);
+                        editIntent.putExtra("sAge", age);
+                        editIntent.putExtra("sPhoneNumber", phoneNumber);
+                        editIntent.putExtra("sState", state);
+                        editIntent.putExtra("sImage", image);
+                        startActivity(editIntent);
+                    }
+                });
             }
 
             @Override

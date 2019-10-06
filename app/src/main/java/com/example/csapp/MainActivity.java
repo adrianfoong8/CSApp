@@ -23,13 +23,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    //    private ImageButton btnProfile, btnAboutUs, btnAddDetail, btnDonate;
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
     private FirebaseDatabase firebaseDatabase;
@@ -37,9 +35,10 @@ public class MainActivity extends AppCompatActivity {
     private DatabaseReference ref, ref2;
     private List<ColorSpace.Model> list;
     private RecyclerView recyclerView;
-    private TextView tvName, tvApproval;
-    private Button btnApply;
-    private ImageView ivMainProfile;
+    private TextView tvLabel, tvName, tvApproval;
+    private ImageView ivCl1, ivCl2, ivM1, ivM2, ivM3;
+    private TextView tvCl1, tvCl2, tvCl3, tvCl4, tvCl5, tvCl6, tvM1, tvM2, tvM3, tvM4, tvM5, tvM6;
+    private Button btnApply, btnViewCl;
     private boolean isLogin = false;
 
     @Override
@@ -47,14 +46,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        tvLabel = findViewById(R.id.tv_label);
         tvName = findViewById(R.id.tv_name);
         tvApproval = findViewById(R.id.tv_approval);
-//        recyclerView = findViewById(R.id.rv_main);
-//        recyclerView.setHasFixedSize(true);
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-//        firebaseFirestore = FirebaseFirestore.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         ref = firebaseDatabase.getReference("Users");
+
+        ivCl1 = findViewById(R.id.iv_cl_1);
+        ivCl2 = findViewById(R.id.iv_cl_2);
+        ivM1 = findViewById(R.id.iv_m_1);
+        ivM2 = findViewById(R.id.iv_m_2);
+        ivM3 = findViewById(R.id.iv_m_3);
+        tvCl1 = findViewById(R.id.tv_cl_1);
+        tvCl2 = findViewById(R.id.tv_cl_2);
+        tvCl3 = findViewById(R.id.tv_cl_3);
+        tvCl4 = findViewById(R.id.tv_cl_4);
+        tvCl5 = findViewById(R.id.tv_cl_5);
+        tvCl6 = findViewById(R.id.tv_cl_6);
+        tvM1 = findViewById(R.id.tv_m_1);
+        tvM2 = findViewById(R.id.tv_m_2);
+        tvM3 = findViewById(R.id.tv_m_3);
+        tvM4 = findViewById(R.id.tv_m_4);
+        tvM5 = findViewById(R.id.tv_m_5);
+        tvM6 = findViewById(R.id.tv_m_6);
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -80,13 +94,58 @@ public class MainActivity extends AppCompatActivity {
                                         + " " + dataSnapshot.child("lastName").getValue().toString();
                                 tvName.setText(name);
                                 String image = dataSnapshot.child("image").getValue().toString();
-                                Picasso.get().load(image).into(ivMainProfile);
-                                ivMainProfile.setVisibility(View.VISIBLE);
+                                tvLabel.setVisibility(View.VISIBLE);
                                 tvName.setVisibility(View.VISIBLE);
-                                if (dataSnapshot.child("accountType").getValue().toString().equals("cl")
-                                        && dataSnapshot.child("verified").getValue().toString().equals("f")) {
+                                if (dataSnapshot.child("accountType").getValue().toString().equals("clf")) {
                                     tvApproval.setVisibility(View.VISIBLE);
                                     btnApply.setVisibility(View.VISIBLE);
+                                }
+                                if (dataSnapshot.child("accountType").getValue().toString().equals("clt")) {
+                                    tvApproval.setVisibility(View.GONE);
+                                    btnApply.setVisibility(View.GONE);
+                                }
+                                if (dataSnapshot.child("accountType").getValue().toString().equals("clt")
+                                        || dataSnapshot.child("accountType").getValue().toString().equals("clf")) {
+                                    ivCl1.setVisibility(View.VISIBLE);
+                                    ivCl2.setVisibility(View.VISIBLE);
+                                    tvCl1.setVisibility(View.VISIBLE);
+                                    tvCl2.setVisibility(View.VISIBLE);
+                                    tvCl3.setVisibility(View.VISIBLE);
+                                    tvCl4.setVisibility(View.VISIBLE);
+                                    tvCl5.setVisibility(View.VISIBLE);
+                                    tvCl6.setVisibility(View.VISIBLE);
+
+                                    ivM1.setVisibility(View.GONE);
+                                    ivM2.setVisibility(View.GONE);
+                                    ivM3.setVisibility(View.GONE);
+                                    tvM1.setVisibility(View.GONE);
+                                    tvM2.setVisibility(View.GONE);
+                                    tvM3.setVisibility(View.GONE);
+                                    tvM4.setVisibility(View.GONE);
+                                    tvM5.setVisibility(View.GONE);
+                                    tvM6.setVisibility(View.GONE);
+                                    btnViewCl.setVisibility(View.GONE);
+                                }
+                                if (dataSnapshot.child("accountType").getValue().toString().equals("m")) {
+                                    ivCl1.setVisibility(View.GONE);
+                                    ivCl2.setVisibility(View.GONE);
+                                    tvCl1.setVisibility(View.GONE);
+                                    tvCl2.setVisibility(View.GONE);
+                                    tvCl3.setVisibility(View.GONE);
+                                    tvCl4.setVisibility(View.GONE);
+                                    tvCl5.setVisibility(View.GONE);
+                                    tvCl6.setVisibility(View.GONE);
+
+                                    ivM1.setVisibility(View.VISIBLE);
+                                    ivM2.setVisibility(View.VISIBLE);
+                                    ivM3.setVisibility(View.VISIBLE);
+                                    tvM1.setVisibility(View.VISIBLE);
+                                    tvM2.setVisibility(View.VISIBLE);
+                                    tvM3.setVisibility(View.VISIBLE);
+                                    tvM4.setVisibility(View.VISIBLE);
+                                    tvM5.setVisibility(View.VISIBLE);
+                                    tvM6.setVisibility(View.VISIBLE);
+                                    btnViewCl.setVisibility(View.VISIBLE);
                                 }
                             } else {
 //                                startActivity(new Intent(MainActivity.this, AddUserDetailCLActivity.class));
@@ -104,30 +163,6 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-        ivMainProfile = findViewById(R.id.iv_main_profile);
-        ivMainProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, UserProfileActivity.class));
-            }
-        });
-
-        tvName = findViewById(R.id.tv_name);
-        tvName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, UserProfileActivity.class));
-            }
-        });
-
-        tvApproval = findViewById(R.id.tv_approval);
-        tvApproval.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, UserProfileActivity.class));
-            }
-        });
-
         btnApply = findViewById(R.id.btn_apply);
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,56 +171,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        btnUserProfile = findViewById(R.id.btn_login);
-//        btnUserProfile.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, UserProfileActivity.class));
-//            }
-//        });
-//
-//        btnLogout = findViewById(R.id.btn_register);
-//        btnLogout.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                startActivity(new Intent(MainActivity.this, RegisterCLActivity.class));
-//                logout();
-//            }
-//        });
-//
-//        btnResetPassword = findViewById(R.id.btn_reset_password);
-//        btnResetPassword.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                startActivity(new Intent(MainActivity.this, ResetPasswordActivity.class));
-//                String ue = user.getEmail();
-//                Toast.makeText(MainActivity.this, ue, Toast.LENGTH_SHORT).show();
-//            }
-//        });
-//
-//        btnLocation = findViewById(R.id.btn_location);
-//        btnLocation.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, MapsActivity.class));
-//            }
-//        });
-//
-//        btnAboutUs = findViewById(R.id.btn_about_us);
-//        btnAboutUs.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
-//            }
-//        });
-//
-//        btnAddPackage = findViewById(R.id.btn_next);
-//        btnAddPackage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(MainActivity.this, AddUserDetailCLActivity.class));
-//            }
-//        });
+        btnViewCl = findViewById(R.id.btn_view_cl);
+        btnViewCl.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ViewCLActivity.class));
+            }
+        });
     }
 
     @Override
@@ -243,124 +235,40 @@ public class MainActivity extends AppCompatActivity {
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if (user == null) {
-                    // user auth state is changed - user is null
-                    // launch login activity
                     isLogin = false;
-                    ivMainProfile.setVisibility(View.GONE);
+                    tvLabel.setVisibility(View.GONE);
                     tvName.setVisibility(View.GONE);
                     tvApproval.setVisibility(View.GONE);
                     btnApply.setVisibility(View.GONE);
+
+                    ivCl1.setVisibility(View.GONE);
+                    ivCl2.setVisibility(View.GONE);
+                    tvCl1.setVisibility(View.GONE);
+                    tvCl2.setVisibility(View.GONE);
+                    tvCl3.setVisibility(View.GONE);
+                    tvCl4.setVisibility(View.GONE);
+                    tvCl5.setVisibility(View.GONE);
+                    tvCl6.setVisibility(View.GONE);
+
+                    ivM1.setVisibility(View.GONE);
+                    ivM2.setVisibility(View.GONE);
+                    ivM3.setVisibility(View.GONE);
+                    tvM1.setVisibility(View.GONE);
+                    tvM2.setVisibility(View.GONE);
+                    tvM3.setVisibility(View.GONE);
+                    tvM4.setVisibility(View.GONE);
+                    tvM5.setVisibility(View.GONE);
+                    tvM6.setVisibility(View.GONE);
+                    btnViewCl.setVisibility(View.GONE);
                 }
             }
         };
     }
 
-//    private void showDeleteDialog(final String currentName, final String currentImage) {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-//        builder.setTitle("Delete?");
-//        builder.setMessage("Are you sure to delete " + currentName + "?");
-//
-//        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                Query mQuery = ref.orderByChild("firstName").equalTo(currentName);
-//                mQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-//                    @Override
-//                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                        for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//                            ds.getRef().removeValue();
-//                        }
-//                        Toast.makeText(MainActivity.this, "Deleted successfully", Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onCancelled(@NonNull DatabaseError databaseError) {
-//                        Toast.makeText(MainActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//                StorageReference mPictureRef = getInstance().getReferenceFromUrl(currentImage);
-//                mPictureRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        Toast.makeText(MainActivity.this, "Image deleted successfully", Toast.LENGTH_LONG).show();
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//            }
-//        });
-//
-//        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//        builder.create().show();
-//    }
-
     @Override
     public void onStart() {
         super.onStart();
         auth.addAuthStateListener(authListener);
-
-//        FirebaseRecyclerAdapter<Model, ViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Model, ViewHolder>(
-//                Model.class, R.layout.view_holder, ViewHolder.class, ref) {
-//            @Override
-//            protected void populateViewHolder(ViewHolder viewHolder, Model model, int position) {
-//                viewHolder.setDetails(getApplicationContext(), model.getLastName(), model.getDescription(), model.getDistance(), model.getImage());
-//            }
-//
-//            @Override
-//            public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//                ViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
-//                viewHolder.setOnClickListener(new ViewHolder.ClickListener() {
-//                    @Override
-//                    public void onItemClick(View view, int position) {
-//                        String lastName = getItem(position).getLastName();
-//                        String description = getItem(position).getDescription();
-//                        String image = getItem(position).getImage();
-//
-//                        Intent intent = new Intent(view.getContext(), ViewProfileActivity.class);
-//                        intent.putExtra("lastName", lastName);
-//                        intent.putExtra("description", description);
-//                        intent.putExtra("image", image);
-//                        startActivity(intent);
-//                    }
-//
-//                    @Override
-//                    public void onItemLongClick(View view, int position) {
-////                        final String name = getItem(position).getLastName();
-////                        final String description = getItem(position).getDescription();
-////                        final String image = getItem(position).getImage();
-////
-////                        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-////                        String[] options = {"Update", "Delete"};
-////                        builder.setItems(options, new DialogInterface.OnClickListener() {
-////                            @Override
-////                            public void onClick(DialogInterface dialog, int which) {
-////                                if (which == 0) {
-////                                    Intent intent = new Intent(MainActivity.this, AddProfileActivity.class);
-////                                    intent.putExtra("firstName", name);
-////                                    intent.putExtra("description", description);
-////                                    intent.putExtra("image", image);
-////                                    startActivity(intent);
-////                                }
-////                                if (which == 1) {
-////                                    showDeleteDialog(name, image);
-////                                }
-////                            }
-////                        });
-////                        builder.create().show();
-//                    }
-//                });
-//                return viewHolder;
-//            }
-//        };
-//        recyclerView.setAdapter(firebaseRecyclerAdapter);
     }
 
     @Override

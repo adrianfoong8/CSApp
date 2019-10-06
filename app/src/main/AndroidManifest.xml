@@ -13,6 +13,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".ViewCLProfileActivity"
+            android:label="@string/profile"
+            android:parentActivityName=".ViewCLActivity" />
+        <activity
+            android:name=".ViewCLActivity"
+            android:label="Confinement Ladies"
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:label="@string/edit_profile"
+            android:parentActivityName=".UserProfileActivity" />
+        <activity
             android:name=".ChangePasswordActivity"
             android:label="@string/change_password"
             android:parentActivityName=".UserProfileActivity" />
@@ -59,7 +71,7 @@
         <activity
             android:name=".UserProfileActivity"
             android:label="@string/profile"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".AccountSettingsActivity" />
         <activity
             android:name=".AddUserDetailCLActivity"
             android:label="Add Your Details" />

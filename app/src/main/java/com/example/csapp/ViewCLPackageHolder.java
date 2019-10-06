@@ -8,12 +8,12 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-public class ViewPackageHolder extends RecyclerView.ViewHolder {
+public class ViewCLPackageHolder extends RecyclerView.ViewHolder {
 
     View view;
-    private ViewPackageHolder.ClickListener clickListener;
+    private ViewCLPackageHolder.ClickListener clickListener;
 
-    public ViewPackageHolder(View itemView) {
+    public ViewCLPackageHolder(View itemView) {
         super(itemView);
         view = itemView;
 
@@ -43,7 +43,7 @@ public class ViewPackageHolder extends RecyclerView.ViewHolder {
         tvPackagePrice.setText(packagePrice);
     }
 
-    public void setOnClickListener(ViewPackageHolder.ClickListener clickListener) {
+    public void setOnClickListener(ViewCLPackageHolder.ClickListener clickListener) {
         this.clickListener = clickListener;
     }
 

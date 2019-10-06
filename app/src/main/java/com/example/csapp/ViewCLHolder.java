@@ -8,12 +8,12 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-public class ViewPackageHolder extends RecyclerView.ViewHolder {
+public class ViewCLHolder extends RecyclerView.ViewHolder {
 
     View view;
-    private ViewPackageHolder.ClickListener clickListener;
+    private ViewCLHolder.ClickListener clickListener;
 
-    public ViewPackageHolder(View itemView) {
+    public ViewCLHolder(View itemView) {
         super(itemView);
         view = itemView;
 
@@ -33,17 +33,17 @@ public class ViewPackageHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setDetails(Context ctx, String packagePhoto, String packageName, String packagePrice) {
-        ImageView ivPackagePhoto = view.findViewById(R.id.cv_package_photo);
-        TextView tvPackageName = view.findViewById(R.id.cv_package_name);
-        TextView tvPackagePrice = view.findViewById(R.id.cv_package_price);
+    public void setDetails(Context ctx, String firstName, String lastName, String image) {
+        TextView tvFirstName = view.findViewById(R.id.cv_first_name);
+        TextView tvLastName = view.findViewById(R.id.cv_last_name);
+        ImageView ivProfilePicture = view.findViewById(R.id.cv_profile_picture);
 
-        Picasso.get().load(packagePhoto).into(ivPackagePhoto);
-        tvPackageName.setText(packageName);
-        tvPackagePrice.setText(packagePrice);
+        tvFirstName.setText(firstName);
+        tvLastName.setText(lastName);
+        Picasso.get().load(image).into(ivProfilePicture);
     }
 
-    public void setOnClickListener(ViewPackageHolder.ClickListener clickListener) {
+    public void setOnClickListener(ViewCLHolder.ClickListener clickListener) {
         this.clickListener = clickListener;
     }
 

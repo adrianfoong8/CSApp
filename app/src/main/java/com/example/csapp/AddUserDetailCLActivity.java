@@ -38,17 +38,16 @@ import static com.google.firebase.storage.FirebaseStorage.getInstance;
 
 public class AddUserDetailCLActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    EditText etFirstName, etLastName, etAge, etDateOfBirth, etPhoneNumber, etDescription;
-    ImageView ivProfilePicture;
-    Button btnNext;
-
-    String mStoragePath = "Images/Profile Pictures/";
-    String mDatabasePath = "Users";
-    Uri mFilePathUri;
-    DatabaseReference mDatabaseReference;
-    ProgressDialog mProgressDialog;
-    int IMAGE_REQUEST_CODE = 5;
-    Spinner spState;
+    private EditText etFirstName, etLastName, etAge, etDateOfBirth, etPhoneNumber;
+    private ImageView ivProfilePicture;
+    private Button btnNext;
+    private String mStoragePath = "Images/Profile Pictures/";
+    private String mDatabasePath = "Users";
+    private Uri mFilePathUri;
+    private DatabaseReference mDatabaseReference;
+    private ProgressDialog mProgressDialog;
+    private int IMAGE_REQUEST_CODE = 5;
+    private Spinner spState;
     private StorageReference mStorageReference;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
@@ -99,26 +98,6 @@ public class AddUserDetailCLActivity extends AppCompatActivity implements Adapte
         spState.setAdapter(adapter);
         spState.setOnItemSelectedListener(this);
 
-//        Bundle intent = getIntent().getExtras();
-//        if (intent != null) {
-//            accountType = intent.getString("accountType");
-//            firstName = intent.getString("firstName");
-//            lastName = intent.getString("lastName");
-//            dateOfBirth = intent.getString("dateOfBirth");
-//            age = intent.getString("age");
-//            phoneNumber = intent.getString("phoneNumber");
-//            nationality = intent.getString("nationality");
-//            state = intent.getString("state");
-//            description = intent.getString("description");
-//            image = intent.getString("image");
-//
-//            etFirstName.setText(firstName);
-//            etDescription.setText(description);
-//            Picasso.get().load(image).into(ivProfilePicture);
-//
-//            btnNext.setText("Update");
-//        }
-
         ivProfilePicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -133,110 +112,18 @@ public class AddUserDetailCLActivity extends AppCompatActivity implements Adapte
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (btnNext.getText().equals("Next")) {
-                    uploadDataToFirebase();
-                } else {
-//                    beginUpdate();
-                }
+                uploadDataToFirebase();
             }
         });
 
         mStorageReference = getInstance().getReference();
         mDatabaseReference = FirebaseDatabase.getInstance().getReference(mDatabasePath);
         mProgressDialog = new ProgressDialog(AddUserDetailCLActivity.this);
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String imageUploadId = user.getUid();
+        String newStoragePath = mStoragePath + imageUploadId + "/";
+        mStoragePath = newStoragePath;
     }
-
-//    private void beginUpdate() {
-//        mProgressDialog.setMessage("Updating...");
-//        mProgressDialog.show();
-//        deletePreviousImage();
-//    }
-
-//    private void deletePreviousImage() {
-//        StorageReference mPictureRef = getInstance().getReferenceFromUrl(image);
-//        mPictureRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-//            @Override
-//            public void onSuccess(Void aVoid) {
-//                Toast.makeText(AddUserDetailCLActivity.this, "Previous image deleted.", Toast.LENGTH_SHORT).show();
-//                uploadNewImage();
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(AddUserDetailCLActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-//                mProgressDialog.dismiss();
-//            }
-//        });
-//    }
-
-//    private void uploadNewImage() {
-//        String imageName = System.currentTimeMillis() + ".png";
-//        StorageReference storageReference2 = mStorageReference.child(mStoragePath + imageName);
-//        Bitmap bitmap = ((BitmapDrawable) ivProfilePicture.getDrawable()).getBitmap();
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-//        byte[] data = baos.toByteArray();
-//        UploadTask uploadTask = storageReference2.putBytes(data);
-//        uploadTask.addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-//            @Override
-//            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-//                Toast.makeText(AddUserDetailCLActivity.this, "New image uploaded.", Toast.LENGTH_SHORT).show();
-//
-//                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-//                while (!uriTask.isSuccessful()) ;
-//                Uri downloadUri = uriTask.getResult();
-//                updateDatabase(downloadUri.toString());
-//            }
-//        }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(AddUserDetailCLActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-//                mProgressDialog.dismiss();
-//            }
-//        });
-//    }
-
-//    private void updateDatabase(final String image) {
-//        final String accountType = spAccountType.getSelectedItem().toString();
-//        final String firstName = etFirstName.getText().toString();
-//        final String lastName = etLastName.getText().toString();
-//        final String dateOfBirth = etDateOfBirth.getText().toString();
-//        final String age = etAge.getText().toString();
-//        final String phoneNumber = etPhoneNumber.getText().toString();
-//        final String nationality = spNationality.getSelectedItem().toString();
-//        final String state = spState.getSelectedItem().toString();
-//        final String description = etDescription.getText().toString();
-//        FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-//        DatabaseReference mRef = mFirebaseDatabase.getReference("Users");
-//
-//        Query query = mRef.orderByChild("firstName").equalTo(this.firstName);
-//        query.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                for (DataSnapshot ds : dataSnapshot.getChildren()) {
-//                    ds.getRef().child("accountType").setValue(accountType);
-//                    ds.getRef().child("firstName").setValue(firstName);
-//                    ds.getRef().child("lastName").setValue(lastName);
-//                    ds.getRef().child("dateOfBirth").setValue(dateOfBirth);
-//                    ds.getRef().child("age").setValue(age);
-//                    ds.getRef().child("phoneNumber").setValue(phoneNumber);
-//                    ds.getRef().child("nationality").setValue(nationality);
-//                    ds.getRef().child("state").setValue(state);
-//                    ds.getRef().child("description").setValue(description);
-//                    ds.getRef().child("image").setValue(image);
-//                }
-//                mProgressDialog.dismiss();
-//                Toast.makeText(AddUserDetailCLActivity.this, "Data updated.", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(AddUserDetailCLActivity.this, MainActivity.class));
-//                finish();
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
 
     private void uploadDataToFirebase() {
         if (mFilePathUri != null) {
@@ -252,8 +139,9 @@ public class AddUserDetailCLActivity extends AppCompatActivity implements Adapte
                             while (!uriTask.isSuccessful()) ;
                             Uri downloadUri = uriTask.getResult();
 
-                            String accountType = "cl";
-                            String verified = "f";
+                            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                            String uid = user.getUid();
+                            String accountType = "clf";
                             String firstName = etFirstName.getText().toString().trim();
                             String lastName = etLastName.getText().toString().trim();
                             String dateOfBirth = etDateOfBirth.getText().toString().trim();
@@ -264,14 +152,11 @@ public class AddUserDetailCLActivity extends AppCompatActivity implements Adapte
                             Toast.makeText(AddUserDetailCLActivity.this, "Uploaded successfully.",
                                     Toast.LENGTH_SHORT).show();
 
-                            UploadInformation uploadInformation = new UploadInformation(accountType,
-                                    verified, firstName, lastName, dateOfBirth, age, phoneNumber,
-                                    state, downloadUri.toString());
+                            UploadInformation uploadInformation = new UploadInformation(uid,
+                                    accountType, firstName, lastName, dateOfBirth, age,
+                                    phoneNumber, state, downloadUri.toString());
 
-//                            String imageUploadId = mDatabaseReference.push().getKey();
-                            final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            String imageUploadId = user.getUid();
-                            mDatabaseReference.child(imageUploadId).setValue(uploadInformation);
+                            mDatabaseReference.child(user.getUid()).setValue(uploadInformation);
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);

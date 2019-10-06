@@ -2,8 +2,8 @@ package com.example.csapp;
 
 public class UploadInformation {
 
+    String uid;
     String accountType;
-    String verified;
     String firstName;
     String lastName;
     String dateOfBirth;
@@ -15,10 +15,9 @@ public class UploadInformation {
     public UploadInformation() {
     }
 
-    public UploadInformation(String accountType,String verified, String firstName, String lastName, String dateOfBirth,
-                             String age, String phoneNumber, String state, String image) {
+    public UploadInformation(String uid, String accountType, String firstName, String lastName, String dateOfBirth, String age, String phoneNumber, String state, String image) {
+        this.uid = uid;
         this.accountType = accountType;
-        this.verified= verified;
         this.firstName = firstName;
         this.lastName = lastName;
         this.dateOfBirth = dateOfBirth;
@@ -28,12 +27,12 @@ public class UploadInformation {
         this.image = image;
     }
 
-    public String getAccountType() {
-        return accountType;
+    public String getUid() {
+        return uid;
     }
 
-    public String getVerified() {
-        return verified;
+    public String getAccountType() {
+        return accountType;
     }
 
     public String getFirstName() {

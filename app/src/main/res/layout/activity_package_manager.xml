@@ -4,21 +4,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
     tools:context=".PackageManagerActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@android:color/darker_gray" />
 
     <Button
         android:id="@+id/btn_add_package"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/colorAccent"
+        android:background="@android:color/transparent"
+        android:gravity="start|center"
+        android:paddingStart="16dp"
         android:text="@string/add_package" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@android:color/darker_gray" />
 
     <Button
         android:id="@+id/btn_view_package"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="@color/colorAccent"
+        android:background="@android:color/transparent"
+        android:gravity="start|center"
+        android:paddingStart="16dp"
         android:text="@string/view_package" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:src="@android:color/darker_gray" />
 </LinearLayout>

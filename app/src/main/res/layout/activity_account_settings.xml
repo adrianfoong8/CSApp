@@ -42,5 +42,18 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:src="@android:color/darker_gray" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:gravity="start|center"
+            android:paddingStart="16dp"
+            android:text="@string/paypal_settings" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@android:color/darker_gray" />
     </LinearLayout>
 </ScrollView>

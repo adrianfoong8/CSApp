@@ -1,13 +1,13 @@
 package com.example.csapp;
 
-public class ModelPackage {
+public class ModelCLPackage {
 
     String packageId, packagePhoto, packageName, packagePrice, packageDescription;
 
-    public ModelPackage() {
+    public ModelCLPackage() {
     }
 
-    public ModelPackage(String packageId, String packagePhoto, String packageName, String packagePrice, String packageDescription) {
+    public ModelCLPackage(String packageId, String packagePhoto, String packageName, String packagePrice, String packageDescription) {
         this.packageId = packageId;
         this.packagePhoto = packagePhoto;
         this.packageName = packageName;
