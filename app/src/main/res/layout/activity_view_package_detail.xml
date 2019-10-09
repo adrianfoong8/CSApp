@@ -40,5 +40,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/package_description" />
+
+        <Button
+            android:id="@+id/btn_booking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/colorAccent"
+            android:text="Book Now" />
     </LinearLayout>
 </ScrollView>

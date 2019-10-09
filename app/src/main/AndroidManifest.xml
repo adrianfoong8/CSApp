@@ -13,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".BookingActivity"
+            android:label="Booking"
+            android:parentActivityName=".ViewCLProfileActivity" />
+        <activity
             android:name=".ViewCLProfileActivity"
             android:label="@string/profile"
             android:parentActivityName=".ViewCLActivity" />

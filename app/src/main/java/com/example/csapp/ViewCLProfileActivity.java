@@ -64,12 +64,14 @@ public class ViewCLProfileActivity extends AppCompatActivity {
                         String packageName = getItem(position).getPackageName();
                         String packagePrice = getItem(position).getPackagePrice();
                         String packageDescription = getItem(position).getPackageDescription();
+                        String packageId = getItem(position).getPackageId();
 
                         Intent intent = new Intent(view.getContext(), ViewPackageDetailActivity.class);
                         intent.putExtra("packagePhoto", packagePhoto);
                         intent.putExtra("packageName", packageName);
                         intent.putExtra("packagePrice", packagePrice);
                         intent.putExtra("packageDescription", packageDescription);
+                        intent.putExtra("packageId", packageId);
                         startActivity(intent);
                     }
 
