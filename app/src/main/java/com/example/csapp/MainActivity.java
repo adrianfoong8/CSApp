@@ -1,6 +1,7 @@
 package com.example.csapp;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.ColorSpace;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,6 +24,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.smarteist.autoimageslider.IndicatorAnimations;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.List;
 
@@ -37,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TextView tvLabel, tvName, tvApproval;
     private ImageView ivCl1, ivCl2, ivM1, ivM2, ivM3;
-    private TextView tvCl1, tvCl2, tvCl3, tvCl4, tvCl5, tvCl6, tvM1, tvM2, tvM3, tvM4, tvM5, tvM6;
-    private Button btnApply, btnViewCl;
+    private TextView tvCl1, tvCl2, tvCl3, tvCl4, tvCl5, tvCl6, tvM1, tvM2, tvM3, tvM4, tvM5, tvM6, tv1, tv2;
+    private Button btnApply, btnViewCL, btnRegister, btnHireCL;
     private boolean isLogin = false;
 
     @Override
@@ -51,6 +55,20 @@ public class MainActivity extends AppCompatActivity {
         tvApproval = findViewById(R.id.tv_approval);
         firebaseDatabase = FirebaseDatabase.getInstance();
         ref = firebaseDatabase.getReference("Users");
+        tv1 = findViewById(R.id.tv1);
+        tv2 = findViewById(R.id.tv2);
+
+        final SliderView sliderView = findViewById(R.id.imageSlider);
+        SliderAdapter adapter = new SliderAdapter(this);
+        sliderView.setSliderAdapter(adapter);
+        sliderView.setIndicatorAnimation(IndicatorAnimations.FILL);
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        sliderView.setIndicatorMargin(4);
+        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_RIGHT);
+        sliderView.setIndicatorSelectedColor(Color.DKGRAY);
+        sliderView.setIndicatorUnselectedColor(Color.GRAY);
+        sliderView.setScrollTimeInSec(5);
+        sliderView.startAutoCycle();
 
         ivCl1 = findViewById(R.id.iv_cl_1);
         ivCl2 = findViewById(R.id.iv_cl_2);
@@ -124,7 +142,13 @@ public class MainActivity extends AppCompatActivity {
                                     tvM4.setVisibility(View.GONE);
                                     tvM5.setVisibility(View.GONE);
                                     tvM6.setVisibility(View.GONE);
-                                    btnViewCl.setVisibility(View.GONE);
+                                    btnViewCL.setVisibility(View.GONE);
+
+                                    sliderView.setVisibility(View.GONE);
+                                    btnRegister.setVisibility(View.GONE);
+                                    btnHireCL.setVisibility(View.GONE);
+                                    tv1.setVisibility(View.GONE);
+                                    tv2.setVisibility(View.GONE);
                                 }
                                 if (dataSnapshot.child("accountType").getValue().toString().equals("m")) {
                                     ivCl1.setVisibility(View.GONE);
@@ -145,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
                                     tvM4.setVisibility(View.VISIBLE);
                                     tvM5.setVisibility(View.VISIBLE);
                                     tvM6.setVisibility(View.VISIBLE);
-                                    btnViewCl.setVisibility(View.VISIBLE);
+                                    btnViewCL.setVisibility(View.VISIBLE);
                                 }
                             } else {
 //                                startActivity(new Intent(MainActivity.this, AddUserDetailCLActivity.class));
@@ -171,8 +195,24 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnViewCl = findViewById(R.id.btn_view_cl);
-        btnViewCl.setOnClickListener(new View.OnClickListener() {
+        btnViewCL = findViewById(R.id.btn_view_cl);
+        btnViewCL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, ViewCLActivity.class));
+            }
+        });
+
+        btnRegister = findViewById(R.id.btn_register);
+        btnRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, RegisterMenuActivity.class));
+            }
+        });
+
+        btnHireCL = findViewById(R.id.btn_hire_cl);
+        btnHireCL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(MainActivity.this, ViewCLActivity.class));
@@ -259,7 +299,7 @@ public class MainActivity extends AppCompatActivity {
                     tvM4.setVisibility(View.GONE);
                     tvM5.setVisibility(View.GONE);
                     tvM6.setVisibility(View.GONE);
-                    btnViewCl.setVisibility(View.GONE);
+                    btnViewCL.setVisibility(View.GONE);
                 }
             }
         };

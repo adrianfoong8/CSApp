@@ -41,7 +41,7 @@
     <string name="package_name">Package Name</string>
     <string name="price">Price</string>
     <string name="package_description">Package Description</string>
-    <string name="package_price">Package Price</string>
+    <string name="package_price">Package Price RM</string>
     <string name="approval_pending">Approval Pending</string>
     <string name="account_settings">Account Settings</string>
     <string name="profile_settings">Profile Settings</string>
@@ -59,7 +59,13 @@
     <string name="new_password">New Password</string>
     <string name="save">Save</string>
     <string name="package_photo">Package Photo</string>
-    <string name="paypal_settings">PayPal Settings</string>
+    <string name="my_wallet">My Wallet</string>
+    <string name="manage_package">Manage Package</string>
+    <string name="tnc"><![CDATA[Terms & Conditions]]></string>
+    <string name="otnc"><![CDATA[Other Terms & Conditions]]></string>
+    <string name="user_testimony">User Testimony</string>
+    <string name="package_duration">Package Duration</string>
+    <string name="package_service">Package Service</string>
 
     <string-array name="nationality">
         <item>Select</item>
@@ -89,5 +95,15 @@
         <item>Select</item>
         <item>Confinement Lady</item>
         <item>Mother</item>
+    </string-array>
+
+    <string-array name="package_duration">
+        <item>Select</item>
+        <item>1 Day</item>
+        <item>7 Days</item>
+        <item>14 Days</item>
+        <item>21 Days</item>
+        <item>28 Days</item>
+        <item>28 Days and Above</item>
     </string-array>
 </resources>

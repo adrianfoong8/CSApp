@@ -21,7 +21,7 @@ public class ViewCLProfileActivity extends AppCompatActivity {
     private DatabaseReference ref;
     private RecyclerView recyclerView;
     private ImageView ivImage;
-    private TextView tvName;
+    private TextView tvName, tvState, tvAge, tvPhoneNumber, tvTnc, tvOtnc;
     private String uid;
 
     @Override
@@ -31,15 +31,30 @@ public class ViewCLProfileActivity extends AppCompatActivity {
 
         ivImage = findViewById(R.id.iv_profile);
         tvName = findViewById(R.id.tv_name);
+        tvState = findViewById(R.id.tv_state);
+        tvAge = findViewById(R.id.tv_age);
+        tvPhoneNumber = findViewById(R.id.tv_phone_number);
+        tvTnc = findViewById(R.id.tv_tnc);
+        tvOtnc = findViewById(R.id.tv_otnc);
 
         String image = getIntent().getStringExtra("image");
         String firstName = getIntent().getStringExtra("firstName");
         String lastName = getIntent().getStringExtra("lastName");
         String name = firstName + " " + lastName;
         uid = getIntent().getStringExtra("uid");
+        String age = getIntent().getStringExtra("age");
+        String phoneNumber = getIntent().getStringExtra("phoneNumber");
+        String state = getIntent().getStringExtra("state");
+        String tnc = getIntent().getStringExtra("tnc");
+        String otnc = getIntent().getStringExtra("otnc");
 
         Picasso.get().load(image).into(ivImage);
         tvName.setText(name);
+        tvAge.setText(age);
+        tvPhoneNumber.setText(phoneNumber);
+        tvState.setText(state);
+        tvTnc.setText(tnc);
+        tvOtnc.setText(otnc);
 
         recyclerView = findViewById(R.id.rv_cl_package);
         recyclerView.setHasFixedSize(true);
@@ -65,6 +80,11 @@ public class ViewCLProfileActivity extends AppCompatActivity {
                         String packagePrice = getItem(position).getPackagePrice();
                         String packageDescription = getItem(position).getPackageDescription();
                         String packageId = getItem(position).getPackageId();
+                        String packageUserTestimony = getItem(position).getPackageUserTestimony();
+                        String packageDuration = getItem(position).getPackageDuration();
+                        String packageService = getItem(position).getPackageService();
+                        String packageAvailableStartDate = getItem(position).getPackageAvailableStartDate();
+                        String packageAvailableEndDate = getItem(position).getPackageAvailableEndDate();
 
                         Intent intent = new Intent(view.getContext(), ViewPackageDetailActivity.class);
                         intent.putExtra("packagePhoto", packagePhoto);
@@ -72,6 +92,11 @@ public class ViewCLProfileActivity extends AppCompatActivity {
                         intent.putExtra("packagePrice", packagePrice);
                         intent.putExtra("packageDescription", packageDescription);
                         intent.putExtra("packageId", packageId);
+                        intent.putExtra("packageUserTestimony", packageUserTestimony);
+                        intent.putExtra("packageDuration", packageDuration);
+                        intent.putExtra("packageService", packageService);
+                        intent.putExtra("packageAvailableStartDate", packageAvailableStartDate);
+                        intent.putExtra("packageAvailableEndDate", packageAvailableEndDate);
                         startActivity(intent);
                     }
 

@@ -19,6 +19,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -38,7 +39,7 @@ import static com.google.firebase.storage.FirebaseStorage.getInstance;
 
 public class AddUserDetailMActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private EditText etFirstName, etLastName, etAge, etDateOfBirth, etPhoneNumber;
+    private EditText etFirstName, etLastName, etAge, etDateOfBirth, etPhoneNumber, etTnC, etOTnC;
     private ImageView ivProfilePicture;
     private Button btnNext;
     private String mStoragePath = "Images/Profile Pictures/";
@@ -51,6 +52,7 @@ public class AddUserDetailMActivity extends AppCompatActivity implements Adapter
     private Spinner spState;
     private StorageReference mStorageReference;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
+    private TextView tv1, tv2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +67,14 @@ public class AddUserDetailMActivity extends AppCompatActivity implements Adapter
         btnNext = findViewById(R.id.btn_next);
         spState = findViewById(R.id.sp_state);
         etPhoneNumber = findViewById(R.id.et_phone_number);
+        etTnC = findViewById(R.id.et_terms_conditions);
+        etOTnC = findViewById(R.id.et_other_terms_conditions);
+        etTnC.setVisibility(View.GONE);
+        etOTnC.setVisibility(View.GONE);
+        tv1 = findViewById(R.id.tv_terms_conditions);
+        tv2 = findViewById(R.id.tv_other_terms_conditions);
+        tv1.setVisibility(View.GONE);
+        tv2.setVisibility(View.GONE);
 
         etDateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,13 +159,15 @@ public class AddUserDetailMActivity extends AppCompatActivity implements Adapter
                             String age = etAge.getText().toString().trim();
                             String phoneNumber = etPhoneNumber.getText().toString().trim();
                             String state = spState.getSelectedItem().toString().trim();
+                            String tnc = etTnC.getText().toString().trim();
+                            String otnc = etOTnC.getText().toString().trim();
                             mProgressDialog.dismiss();
                             Toast.makeText(AddUserDetailMActivity.this, "Uploaded successfully.",
                                     Toast.LENGTH_SHORT).show();
 
                             UploadInformation uploadInformation = new UploadInformation(uid,
                                     accountType, firstName, lastName, dateOfBirth, age,
-                                    phoneNumber, state, downloadUri.toString());
+                                    phoneNumber, state, tnc, otnc, downloadUri.toString());
 
                             mDatabaseReference.child(user.getUid()).setValue(uploadInformation);
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);

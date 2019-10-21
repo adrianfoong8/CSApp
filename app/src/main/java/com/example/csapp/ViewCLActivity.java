@@ -56,7 +56,7 @@ public class ViewCLActivity extends AppCompatActivity {
         ) {
             @Override
             protected void populateViewHolder(ViewCLHolder viewHolder, ModelCL model, int position) {
-                viewHolder.setDetails(getApplicationContext(), model.getFirstName(), model.getLastName(), model.getImage());
+                viewHolder.setDetails(getApplicationContext(), model.getFirstName(), model.getLastName(), model.getImage(), model.getState());
             }
 
             @Override
@@ -69,12 +69,22 @@ public class ViewCLActivity extends AppCompatActivity {
                         String lastName = getItem(position).getLastName();
                         String image = getItem(position).getImage();
                         String uid = getItem(position).getUid();
+                        String age = getItem(position).getAge();
+                        String phoneNumber = getItem(position).getPhoneNumber();
+                        String state = getItem(position).getState();
+                        String tnc = getItem(position).getTnc();
+                        String otnc = getItem(position).getOtnc();
 
                         Intent intent = new Intent(view.getContext(), ViewCLProfileActivity.class);
                         intent.putExtra("firstName", firstName);
                         intent.putExtra("lastName", lastName);
                         intent.putExtra("image", image);
                         intent.putExtra("uid", uid);
+                        intent.putExtra("age", age);
+                        intent.putExtra("phoneNumber", phoneNumber);
+                        intent.putExtra("state", state);
+                        intent.putExtra("tnc", tnc);
+                        intent.putExtra("otnc", otnc);
                         startActivity(intent);
                     }
 

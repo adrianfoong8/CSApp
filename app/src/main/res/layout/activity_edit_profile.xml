@@ -153,6 +153,36 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Terms &amp; Conditions" />
+
+        <EditText
+            android:id="@+id/et_terms_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:lines="2"
+            android:maxLines="4"
+            android:scrollbars="vertical" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Other Terms &amp; Conditions" />
+
+        <EditText
+            android:id="@+id/et_other_terms_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:lines="2"
+            android:maxLines="4"
+            android:scrollbars="vertical" />
+
         <Button
             android:id="@+id/btn_save"
             android:layout_width="match_parent"

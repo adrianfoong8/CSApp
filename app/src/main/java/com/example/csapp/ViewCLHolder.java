@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
+import org.w3c.dom.Text;
+
 public class ViewCLHolder extends RecyclerView.ViewHolder {
 
     View view;
@@ -33,14 +35,16 @@ public class ViewCLHolder extends RecyclerView.ViewHolder {
         });
     }
 
-    public void setDetails(Context ctx, String firstName, String lastName, String image) {
+    public void setDetails(Context ctx, String firstName, String lastName, String image, String state) {
         TextView tvFirstName = view.findViewById(R.id.cv_first_name);
         TextView tvLastName = view.findViewById(R.id.cv_last_name);
         ImageView ivProfilePicture = view.findViewById(R.id.cv_profile_picture);
+        TextView tvState = view.findViewById(R.id.cv_state);
 
         tvFirstName.setText(firstName);
         tvLastName.setText(lastName);
         Picasso.get().load(image).into(ivProfilePicture);
+        tvState.setText(state);
     }
 
     public void setOnClickListener(ViewCLHolder.ClickListener clickListener) {

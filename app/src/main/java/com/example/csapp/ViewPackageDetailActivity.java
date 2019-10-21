@@ -23,8 +23,8 @@ public class ViewPackageDetailActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener authListener;
     private FirebaseAuth auth;
     private DatabaseReference ref, ref2;
-    private ImageView ivPackagePhoto;
-    private TextView tvPackageName, tvPackagePrice, tvPackageDescription;
+    private ImageView ivPackagePhoto, ivUserTestimony;
+    private TextView tvPackageName, tvPackagePrice, tvPackageDescription, tvPackageDuration, tvPackageService, tvPackageStartDate, tvPackageEndDate;
     private Button btnBooking;
 
     @Override
@@ -33,19 +33,34 @@ public class ViewPackageDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_package_detail);
 
         ivPackagePhoto = findViewById(R.id.iv_package_photo);
+        ivUserTestimony = findViewById(R.id.iv_user_testimony);
         tvPackageName = findViewById(R.id.tv_package_name);
         tvPackagePrice = findViewById(R.id.tv_package_price);
         tvPackageDescription = findViewById(R.id.tv_package_description);
+        tvPackageDuration = findViewById(R.id.tv_package_duration);
+        tvPackageService = findViewById(R.id.tv_package_service);
+        tvPackageStartDate = findViewById(R.id.tv_package_start_date);
+        tvPackageEndDate = findViewById(R.id.tv_package_end_date);
 
         String packagePhoto = getIntent().getStringExtra("packagePhoto");
-        String packageName = getIntent().getStringExtra("packageName");
-        String packagePrice = getIntent().getStringExtra("packagePrice");
+        String packageUserTestimony = getIntent().getStringExtra("packageUserTestimony");
+        final String packageName = getIntent().getStringExtra("packageName");
+        final String packagePrice = getIntent().getStringExtra("packagePrice");
         String packageDescription = getIntent().getStringExtra("packageDescription");
+        final String packageDuration = getIntent().getStringExtra("packageDuration");
+        String packageService = getIntent().getStringExtra("packageService");
+        String packageAvailableStartDate = getIntent().getStringExtra("packageAvailableStartDate");
+        String packageAvailableEndDate = getIntent().getStringExtra("packageAvailableEndDate");
 
         Picasso.get().load(packagePhoto).into(ivPackagePhoto);
+        Picasso.get().load(packageUserTestimony).into(ivUserTestimony);
         tvPackageName.setText(packageName);
         tvPackagePrice.setText(packagePrice);
         tvPackageDescription.setText(packageDescription);
+        tvPackageDuration.setText(packageDuration);
+        tvPackageService.setText(packageService);
+        tvPackageStartDate.setText(packageAvailableStartDate);
+        tvPackageEndDate.setText(packageAvailableEndDate);
 
         //get firebase auth instance
         auth = FirebaseAuth.getInstance();
@@ -93,7 +108,11 @@ public class ViewPackageDetailActivity extends AppCompatActivity {
         btnBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ViewPackageDetailActivity.this, BookingActivity.class));
+                Intent intent = new Intent(view.getContext(), BookingActivity.class);
+                intent.putExtra("packageName", packageName);
+                intent.putExtra("packagePrice", packagePrice);
+                intent.putExtra("packageDuration",packageDuration);
+                startActivity(intent);
                 finish();
             }
         });

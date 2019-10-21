@@ -13,6 +13,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
+            android:name=".PaymentDetailActivity"
+            android:label="Booking"
+            android:parentActivityName=".ViewCLProfileActivity" />
+        <activity
+            android:name=".PayPalActivity"
+            android:label="Booking"
+            android:parentActivityName=".ViewCLProfileActivity" />
+        <activity
             android:name=".BookingActivity"
             android:label="Booking"
             android:parentActivityName=".ViewCLProfileActivity" />

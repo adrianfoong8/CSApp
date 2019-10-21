@@ -42,8 +42,8 @@ import static com.google.firebase.storage.FirebaseStorage.getInstance;
 
 public class EditProfileActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private EditText etFirstName, etLastName, etAge, etDateOfBirth, etPhoneNumber;
-    private String sFirstName, sLastName, sImage, sAge, sDateOfBirth, sPhoneNumber, sState;
+    private EditText etFirstName, etLastName, etAge, etDateOfBirth, etPhoneNumber, etTnC, etOTnC;
+    private String sFirstName, sLastName, sImage, sAge, sDateOfBirth, sPhoneNumber, sState, sTnc, sOtnc;
     private ImageView ivProfilePicture;
     private Button btnSave;
     private FirebaseAuth.AuthStateListener authListener;
@@ -72,6 +72,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         btnSave = findViewById(R.id.btn_save);
         spState = findViewById(R.id.sp_state);
         etPhoneNumber = findViewById(R.id.et_phone_number);
+        etTnC = findViewById(R.id.et_terms_conditions);
+        etOTnC = findViewById(R.id.et_other_terms_conditions);
 
         etDateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,6 +139,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
             sAge = editIntent.getString("sAge");
             sPhoneNumber = editIntent.getString("sPhoneNumber");
             sState = editIntent.getString("sState");
+            sTnc = editIntent.getString("sTnc");
+            sOtnc = editIntent.getString("sOtnc");
 
             etFirstName.setText(sFirstName);
             etLastName.setText(sLastName);
@@ -145,6 +149,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
             etAge.setText(sAge);
             etPhoneNumber.setText(sPhoneNumber);
             spState.setSelection(getIndex(spState, sState));
+            etTnC.setText(sTnc);
+            etOTnC.setText(sOtnc);
         }
     }
 
@@ -214,6 +220,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
         final String age = etAge.getText().toString();
         final String phoneNumber = etPhoneNumber.getText().toString();
         final String state = spState.getSelectedItem().toString();
+        final String tnc = etTnC.getText().toString();
+        final String otnc = etOTnC.getText().toString();
         FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference mRef = mFirebaseDatabase.getReference("Users");
 
@@ -229,6 +237,8 @@ public class EditProfileActivity extends AppCompatActivity implements AdapterVie
                     ds.getRef().child("age").setValue(age);
                     ds.getRef().child("phoneNumber").setValue(phoneNumber);
                     ds.getRef().child("state").setValue(state);
+                    ds.getRef().child("tnc").setValue(tnc);
+                    ds.getRef().child("otnc").setValue(otnc);
                     ds.getRef().child("image").setValue(image);
                 }
                 mProgressDialog.dismiss();

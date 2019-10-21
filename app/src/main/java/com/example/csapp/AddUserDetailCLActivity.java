@@ -38,7 +38,7 @@ import static com.google.firebase.storage.FirebaseStorage.getInstance;
 
 public class AddUserDetailCLActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    private EditText etFirstName, etLastName, etAge, etDateOfBirth, etPhoneNumber;
+    private EditText etFirstName, etLastName, etAge, etDateOfBirth, etPhoneNumber, etTnC, etOTnC;
     private ImageView ivProfilePicture;
     private Button btnNext;
     private String mStoragePath = "Images/Profile Pictures/";
@@ -64,6 +64,8 @@ public class AddUserDetailCLActivity extends AppCompatActivity implements Adapte
         btnNext = findViewById(R.id.btn_next);
         spState = findViewById(R.id.sp_state);
         etPhoneNumber = findViewById(R.id.et_phone_number);
+        etTnC = findViewById(R.id.et_terms_conditions);
+        etOTnC = findViewById(R.id.et_other_terms_conditions);
 
         etDateOfBirth.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,13 +150,18 @@ public class AddUserDetailCLActivity extends AppCompatActivity implements Adapte
                             String age = etAge.getText().toString().trim();
                             String phoneNumber = etPhoneNumber.getText().toString().trim();
                             String state = spState.getSelectedItem().toString().trim();
+                            String tnc = etTnC.getText().toString().trim();
+                            String otnc = etOTnC.getText().toString().trim();
+//                            if (otnc == null) {
+//                                otnc = " ";
+//                            }
                             mProgressDialog.dismiss();
                             Toast.makeText(AddUserDetailCLActivity.this, "Uploaded successfully.",
                                     Toast.LENGTH_SHORT).show();
 
                             UploadInformation uploadInformation = new UploadInformation(uid,
                                     accountType, firstName, lastName, dateOfBirth, age,
-                                    phoneNumber, state, downloadUri.toString());
+                                    phoneNumber, state, tnc, otnc, downloadUri.toString());
 
                             mDatabaseReference.child(user.getUid()).setValue(uploadInformation);
                             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
@@ -206,7 +213,7 @@ public class AddUserDetailCLActivity extends AppCompatActivity implements Adapte
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-        String nationality = adapterView.getItemAtPosition(i).toString();
+
     }
 
     @Override

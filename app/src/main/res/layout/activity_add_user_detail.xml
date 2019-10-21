@@ -153,6 +153,38 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/tv_terms_conditions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Terms &amp; Conditions" />
+
+        <EditText
+            android:id="@+id/et_terms_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:maxLines="10"
+            android:scrollbars="vertical"
+            android:text="The package price is valid within coverage area and are subjected to an additional transport charges. The prices vary according to locations, seasons and other circumstances." />
+
+        <TextView
+            android:id="@+id/tv_other_terms_conditions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="Other Terms &amp; Conditions" />
+
+        <EditText
+            android:id="@+id/et_other_terms_conditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:maxLines="10"
+            android:scrollbars="vertical"
+            android:text="1. For Malay Live-in Package, the standard service hour is 8am to 8pm daily.\n2. Night care for baby can be done by negotiation.\n3. Proper meals and resting room for praying must be accomodated by client.\n4. The cooking ingredients are not included in the package." />
+
         <Button
             android:id="@+id/btn_next"
             android:layout_width="match_parent"

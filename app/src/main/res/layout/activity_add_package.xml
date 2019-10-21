@@ -3,14 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     tools:context=".AddPackageActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="16dp">
 
         <TextView
             android:layout_width="wrap_content"
@@ -29,11 +28,22 @@
             android:layout_marginTop="16dp"
             android:text="@string/package_price" />
 
-        <EditText
-            android:id="@+id/et_package_price"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RM" />
+
+            <EditText
+                android:id="@+id/et_package_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -45,7 +55,150 @@
             android:id="@+id/et_package_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:inputType="textMultiLine"
+            android:maxLines="10" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/package_duration" />
+
+        <Spinner
+            android:id="@+id/sp_package_duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/package_service" />
+
+        <CheckBox
+            android:id="@+id/cb1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Berbengkung" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:justificationMode="inter_word"
+            android:paddingStart="32dp"
+            android:text="Body of the new mother, will be wiped using herbs and wrapped with fabric &quot;bengking&quot; from below the chest to the back face every day throughout the entire period of confinement. &quot;Bengkung&quot; fabric is from cotton material and equipped with straps to ensure the bandage on the body does not open easily."
+            android:textSize="12sp" />
+
+        <CheckBox
+            android:id="@+id/cb2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Postnatal care" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:justificationMode="inter_word"
+            android:paddingStart="32dp"
+            android:text="Postnatal care will improve the blood circulation aimed to lift the womb, flatten the abdomen and breakdown the intractable fat by doing message, heat treatment &quot;bertungku&quot;, wearing abdominal wrap &quot;berbengkung&quot; and eating herbs."
+            android:textSize="12sp" />
+
+        <CheckBox
+            android:id="@+id/cb3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Postnatal Massage" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:justificationMode="inter_word"
+            android:paddingStart="32dp"
+            android:text="This is done for three consecutive days or at least three times during confinement. The aim is to stimulate the blood veins and vessels, lifting the reproductive tract, removing the blood stain that is still present in the uterus and break down fat."
+            android:textSize="12sp" />
+
+        <CheckBox
+            android:id="@+id/cb4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Herbal Bath" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:justificationMode="inter_word"
+            android:paddingStart="32dp"
+            android:text="Herbs, roots and spices boiled timber to be mixed with water. This herb is believed to refresh the body, the wind and get rid of the smell of blood postpartum."
+            android:textSize="12sp" />
+
+        <CheckBox
+            android:id="@+id/cb5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Traditional Malay postnatal treatments after Caesarean birth" />
+
+        <CheckBox
+            android:id="@+id/cb6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Prenatal Massage" />
+
+        <CheckBox
+            android:id="@+id/cb7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nyonya Halal Confinement Food Delivery" />
+
+        <CheckBox
+            android:id="@+id/cb8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Malay Halal Confinement Food Delivery" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Other Service" />
+
+        <EditText
+            android:id="@+id/et_other_service"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textMultiLine"
+            android:maxLines="10" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Available Date" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/et_available_start_date"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="Start Date" />
+
+            <EditText
+                android:id="@+id/et_available_end_date"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:cursorVisible="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:hint="End Date" />
+        </LinearLayout>
 
         <TextView
             android:layout_width="wrap_content"
@@ -55,6 +208,18 @@
 
         <ImageView
             android:id="@+id/iv_package_photo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/ic_action_add_image" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="@string/user_testimony" />
+
+        <ImageView
+            android:id="@+id/iv_user_testimony"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:src="@drawable/ic_action_add_image" />

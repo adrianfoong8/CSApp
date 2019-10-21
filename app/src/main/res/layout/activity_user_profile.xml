@@ -179,16 +179,43 @@
             android:paddingBottom="8dp">
 
             <TextView
+                android:id="@+id/tv_tnc1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Last recorded location" />
+                android:text="Terms &amp; Conditions" />
 
             <TextView
-                android:id="@+id/tv_location"
+                android:id="@+id/tv_tnc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@string/location"
+                android:text="tnc"
+                android:textColor="@color/colorPrimaryText"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp">
+
+            <TextView
+                android:id="@+id/tv_otnc1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Other Terms &amp; Conditions" />
+
+            <TextView
+                android:id="@+id/tv_otnc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="otnc"
                 android:textColor="@color/colorPrimaryText"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -199,26 +226,6 @@
             android:src="@android:color/darker_gray" />
 
         <Button
-            android:id="@+id/btnGetCurrentLocation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:gravity="start|center"
-            android:paddingStart="16dp"
-            android:text="@string/get_current_location" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:src="@android:color/darker_gray" />
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:src="@android:color/darker_gray" />
-
-        <Button
             android:id="@+id/btn_edit_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -226,6 +233,20 @@
             android:gravity="start|center"
             android:paddingStart="16dp"
             android:text="@string/edit_profile" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:src="@android:color/darker_gray" />
+
+        <Button
+            android:id="@+id/btn_manage_package"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:gravity="start|center"
+            android:paddingStart="16dp"
+            android:text="@string/manage_package" />
 
         <ImageView
             android:layout_width="match_parent"
